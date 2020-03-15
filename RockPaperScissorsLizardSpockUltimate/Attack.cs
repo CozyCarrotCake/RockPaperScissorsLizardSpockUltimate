@@ -20,8 +20,8 @@ namespace RockPaperScissorsLizardSpockUltimate
         
 
         //Stats
-        protected int damage;
-        protected int defense;
+        protected double damage;
+        protected double defense;
         protected double combo;
         protected double criticalHit;
 
@@ -48,6 +48,21 @@ namespace RockPaperScissorsLizardSpockUltimate
             {
                 return againstSpock;
             }
+        }
+
+
+        public double DoDamage()
+        {
+            double theDamage = damage;
+
+            return theDamage;
+        }
+
+        public double TakeDamage(double takenDamage)
+        {
+            takenDamage = takenDamage / defense;
+
+            return takenDamage;
         }
 
     }

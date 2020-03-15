@@ -7,20 +7,22 @@ using System.Threading.Tasks;
 namespace RockPaperScissorsLizardSpockUltimate
 {
     class Program
+
+
+
+
+        //ITS ALWAYS A DRAW?
     {
         static void Main(string[] args)
         {
-            float yourHP = 100.0f;
-            float opponentHP = 100.0f;
+            Character yourChar = new Character();
+            Character opponentChar = new Character();
 
 
             Intro();
 
-            while (yourHP > 0 && opponentHP > 0)
-            {
-                Fight();
-            }
-
+            Fight(yourChar, opponentChar);
+            
             
             Console.ReadLine();
         }
@@ -55,36 +57,114 @@ namespace RockPaperScissorsLizardSpockUltimate
 
 
 
-        static void Fight()
+        static void Fight(Character yourChar, Character opponentChar)
         {
-            Console.WriteLine("Choose your attack!");
+            double damageDealt = 0;
+            double damageTaken = 0;
 
-            string attackSelection = Console.ReadLine();
-            int attackIndex;
-            bool attackSuccess = int.TryParse(attackSelection, out attackIndex);
+            int attackIndex = 0;
+            Attack yourAttack = new Attack();
+            Attack opponentAttack = new Attack();
 
-            if (attackSuccess == false || attackIndex < 1 || attackIndex > 5)
+            int wOL;
+            
+
+            while (yourChar.hp > 0 && opponentChar.hp > 0)
             {
-                Console.WriteLine("You failed to choose an attack!");
-            }
-            else
-            {
-                Attack yourAttack = WhichAttack(attackIndex);
+                Console.WriteLine(yourChar.hp);
+                Console.WriteLine(opponentChar.hp);
 
 
-                Random opponentAttackGen = new Random();
-                attackIndex = opponentAttackGen.Next(1, 6);
-                Attack opponentAttack = WhichAttack(attackIndex);
+                //Choose Attack
+
+                Console.WriteLine("Choose your attack!");
+
+                string attackSelection = Console.ReadLine();
+                bool attackSuccess = int.TryParse(attackSelection, out attackIndex);
+
+                if (attackSuccess == false || attackIndex < 1 || attackIndex > 5)
+                {
+                    Console.WriteLine("You failed to choose an attack!");
+
+                    FailedAttack();
+
+                }
+                else
+                {
+                    yourAttack = YourAttack(attackIndex);
+                    opponentAttack = OpponentAttack(attackIndex);
+                }
+
+
+                
 
                 Console.WriteLine("You chose " + yourAttack.name);
                 Console.WriteLine("Your opponent chose " + opponentAttack.name);
 
-                string h = "against" + opponentAttack.name;
 
-                WinOrLoose(attackIndex, yourAttack);
+
+
+                wOL = WinOrLoose(attackIndex, yourAttack);
+
+                if (wOL == 1)
+                {
+                    Console.WriteLine("You Win!");
+                    damageDealt = yourAttack.DoDamage() + yourChar.DoDamage();
+
+
+                    damageTaken = opponentAttack.TakeDamage(damageDealt) + opponentChar.TakeDamage(damageDealt);
+
+
+                    
+                }
+                else if (wOL == 0)
+                {
+                    Console.WriteLine("It's a Draw!");
+                }
+                else
+                {
+                    Console.WriteLine("You Loose!");
+                }
 
             }
+
         }
+
+
+
+
+        static int ChooseAttack(int attackIndex, Attack yourAttack)
+        {
+            
+
+
+            return attackIndex;
+        }
+
+
+        static Attack FailedAttack()
+        {
+            Attack yourAttack = new None();
+
+            return yourAttack;
+        }
+
+        static Attack YourAttack(int attackIndex)
+        {
+            Attack yourAttack = WhichAttack(attackIndex);
+
+            return yourAttack;
+        }
+
+        static Attack OpponentAttack(int attackIndex)
+        {
+            Random opponentAttackGen = new Random();
+            attackIndex = opponentAttackGen.Next(1, 6);
+            Attack opponentAttack = WhichAttack(attackIndex);
+
+            return opponentAttack;
+        }
+
 
 
 
@@ -119,23 +199,11 @@ namespace RockPaperScissorsLizardSpockUltimate
 
 
 
-        static void WinOrLoose(int attackIndex, Attack yourAttack)
+        static int WinOrLoose(int attackIndex, Attack yourAttack)
         {
             int wOL = yourAttack.Against(attackIndex);
-            
-            if (wOL == 1)
-            {
-                Console.WriteLine("You Win!");
-            }
-            else if (wOL == 0)
-            {
-                Console.WriteLine("It's a Draw!");
-            }
-            else
-            {
-                Console.WriteLine("You Loose!");
-            }
 
+            return wOL;
         }
 
     }

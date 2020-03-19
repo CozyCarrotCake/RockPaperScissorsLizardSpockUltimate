@@ -17,14 +17,16 @@ namespace RockPaperScissorsLizardSpockUltimate
         protected int againstScissors;
         protected int againstLizard;
         protected int againstSpock;
-        
+
 
         //Stats
-        protected double damage;
+        public double damage;
         protected double defense;
         protected double combo;
         protected double criticalHit;
 
+
+        protected double theDamage;
 
         public int Against(int attackIndex)
         {
@@ -51,20 +53,17 @@ namespace RockPaperScissorsLizardSpockUltimate
         }
 
 
-        public double DoDamage()
+        public double DoDamage ()
         {
-            double theDamage = damage / 10;
-
+            theDamage = damage / 20;
             return theDamage;
         }
 
+
         public double TakeDamage()
         {
-            double theDamage = defense / 10;
-
-            return theDamage;
-
-            
+                theDamage = defense / 20;
+                return theDamage;
         }
 
     }

@@ -18,6 +18,11 @@ namespace RockPaperScissorsLizardSpockUltimate
 
             Intro();
 
+            ChooseCharacter(yourChar);
+
+            RandomCharacter(opponentChar);
+
+
             Fight(yourChar, opponentChar);
             
             
@@ -29,6 +34,13 @@ namespace RockPaperScissorsLizardSpockUltimate
         static void Intro()
         {
             Console.WriteLine("Hello and welcome to TITLE");
+
+        }
+
+
+        static Character ChooseCharacter(Character yourChar)
+        {
+
             Console.WriteLine("Choose a character!");
 
             string charSelection = Console.ReadLine();
@@ -43,21 +55,40 @@ namespace RockPaperScissorsLizardSpockUltimate
 
             }
 
+            if (charIndex < 7)
+            {
+                yourChar = new Offensive();
+            }
+            else
+            {
+                yourChar = new Defensive();
+            }
+
             Console.WriteLine("Allright you chose CHARACTER");
             //Make 3 times
+
+            return yourChar;
+        }
+
+
+        static Character RandomCharacter(Character opponentChar)
+        {
+
+
 
             Console.WriteLine("Your opponent iiiiis CHARACTER");
 
             Console.WriteLine("Time to fight!");
 
+            return opponentChar;
         }
+
 
 
 
         static void Fight(Character yourChar, Character opponentChar)
         {
             double damageDealt = 10;
-            double damageTaken = 0;
 
             int attackIndex = 0;
             Attack yourAttack = new Attack();
@@ -113,19 +144,8 @@ namespace RockPaperScissorsLizardSpockUltimate
                 if (wOL == 1)
                 {
                     Console.WriteLine("You Win!");
-                    damageDealt = damageDealt + ((yourAttack.DoDamage() + yourChar.DoDamage()) / 2 );
 
-                    //combo
-
-                    damageTaken = damageDealt - ((opponentAttack.TakeDamage() + opponentChar.TakeDamage()) / 2 );
-
-                    if (damageTaken < 5)
-                    {
-                        damageTaken = 5;
-                    }
-
-                    opponentChar.LostHealth(damageTaken);
-                    
+                    DealDamage(damageDealt, yourAttack, opponentAttack, yourChar, opponentChar);
                 }
                 else if (wOL == 0)
                 {
@@ -135,19 +155,8 @@ namespace RockPaperScissorsLizardSpockUltimate
                 {
                     Console.WriteLine("You Loose!");
 
-                    damageDealt = damageDealt + ((opponentAttack.DoDamage() + opponentChar.DoDamage()) / 2);
+                    TakeDamage(damageDealt, yourAttack, opponentAttack, yourChar, opponentChar);
 
-                    //combo
-
-                    damageTaken = damageDealt - ((yourAttack.TakeDamage() + yourChar.TakeDamage()) / 2);
-
-                    if (damageTaken < 5)
-                    {
-                        damageTaken = 5;
-                    }
-
-
-                    yourChar.LostHealth(damageTaken);
                 }
 
             }
@@ -196,9 +205,7 @@ namespace RockPaperScissorsLizardSpockUltimate
             return opponentAttack;
         }
 
-
-
-
+               
         static Attack WhichAttack(int attackIndex)
         {
             Attack whichYourAttack = new Attack();
@@ -236,6 +243,46 @@ namespace RockPaperScissorsLizardSpockUltimate
 
             return wOL;
         }
+
+
+
+
+
+        static void DealDamage(double damageDealt, Attack yourAttack, Attack opponentAttack, Character yourChar, Character opponentChar)
+        {
+
+            damageDealt = damageDealt + yourAttack.DoDamage() + yourChar.DoDamage();
+            //combo
+
+            damageDealt = damageDealt - opponentAttack.TakeDamage() + opponentChar.TakeDamage();
+
+            if (damageDealt < 5)
+            {
+                damageDealt = 5;
+            }
+
+            opponentChar.LostHealth = damageDealt;
+
+
+        }
+
+        static void TakeDamage(double damageDealt, Attack yourAttack, Attack opponentAttack, Character yourChar, Character opponentChar)
+        {
+            damageDealt = damageDealt + opponentAttack.DoDamage() + opponentChar.DoDamage();
+            
+            //combo
+
+            damageDealt = damageDealt - yourAttack.TakeDamage() + yourChar.TakeDamage();
+
+            if (damageDealt < 5)
+            {
+                damageDealt = 5;
+            }
+
+
+            yourChar.LostHealth = damageDealt;
+        }
+
 
     }
 }

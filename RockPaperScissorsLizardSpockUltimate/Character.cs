@@ -20,26 +20,37 @@ namespace RockPaperScissorsLizardSpockUltimate
         protected double criticalHit;
 
 
+        protected double theDamage;
+
+
+
         public double DoDamage()
         {
-            double theDamage = damage / 10;
-
+            theDamage = damage / 20;
             return theDamage;
         }
+
 
         public double TakeDamage()
         {
-            double theDamage = defense / 2;
-
+            theDamage = defense / 20;
             return theDamage;
-
-            
         }
 
 
-        public void LostHealth(double takenDamage)
+        public double LostHealth
         {
-            hp -= takenDamage;
+            get
+            {
+                return hp;
+            }
+            set
+            {
+                hp -= value;
+            }
+            
+
+            
 
         }
     }

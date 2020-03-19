@@ -8,10 +8,7 @@ namespace RockPaperScissorsLizardSpockUltimate
 {
     class Program
 
-
-
-
-        //ITS ALWAYS A DRAW?
+        
     {
         static void Main(string[] args)
         {
@@ -59,20 +56,22 @@ namespace RockPaperScissorsLizardSpockUltimate
 
         static void Fight(Character yourChar, Character opponentChar)
         {
-            double damageDealt = 0;
+            double damageDealt = 10;
             double damageTaken = 0;
 
             int attackIndex = 0;
             Attack yourAttack = new Attack();
             Attack opponentAttack = new Attack();
 
+            bool didChoose;
+
             int wOL;
             
 
             while (yourChar.hp > 0 && opponentChar.hp > 0)
             {
-                Console.WriteLine(yourChar.hp);
-                Console.WriteLine(opponentChar.hp);
+                Console.WriteLine("Your remaining HP: " + yourChar.hp);
+                Console.WriteLine("Your opponents remaining HP: " + opponentChar.hp);
 
 
                 //Choose Attack
@@ -86,35 +85,46 @@ namespace RockPaperScissorsLizardSpockUltimate
                 {
                     Console.WriteLine("You failed to choose an attack!");
 
-                    FailedAttack();
-
+                    didChoose = false;
                 }
                 else
                 {
-                    yourAttack = YourAttack(attackIndex);
-                    opponentAttack = OpponentAttack(attackIndex);
+                    didChoose = true;
                 }
 
+                yourAttack = YourAttack(attackIndex, yourAttack, didChoose);
 
+                if (didChoose == true)
+                {
+                    //Make smart
+                    Random opponentAttackGen = new Random();
+                    attackIndex = opponentAttackGen.Next(1, 6);
+                    opponentAttack = OpponentAttack(attackIndex);
+                }
                 
-
+                
                 Console.WriteLine("You chose " + yourAttack.name);
                 Console.WriteLine("Your opponent chose " + opponentAttack.name);
 
 
-
-
+                
                 wOL = WinOrLoose(attackIndex, yourAttack);
 
                 if (wOL == 1)
                 {
                     Console.WriteLine("You Win!");
-                    damageDealt = yourAttack.DoDamage() + yourChar.DoDamage();
+                    damageDealt = damageDealt + ((yourAttack.DoDamage() + yourChar.DoDamage()) / 2 );
 
+                    //combo
 
-                    damageTaken = opponentAttack.TakeDamage(damageDealt) + opponentChar.TakeDamage(damageDealt);
+                    damageTaken = damageDealt - ((opponentAttack.TakeDamage() + opponentChar.TakeDamage()) / 2 );
 
+                    if (damageTaken < 5)
+                    {
+                        damageTaken = 5;
+                    }
 
+                    opponentChar.LostHealth(damageTaken);
                     
                 }
                 else if (wOL == 0)
@@ -124,9 +134,25 @@ namespace RockPaperScissorsLizardSpockUltimate
                 else
                 {
                     Console.WriteLine("You Loose!");
+
+                    damageDealt = damageDealt + ((opponentAttack.DoDamage() + opponentChar.DoDamage()) / 2);
+
+                    //combo
+
+                    damageTaken = damageDealt - ((yourAttack.TakeDamage() + yourChar.TakeDamage()) / 2);
+
+                    if (damageTaken < 5)
+                    {
+                        damageTaken = 5;
+                    }
+
+
+                    yourChar.LostHealth(damageTaken);
                 }
 
             }
+            
+
 
         }
 
@@ -149,17 +175,22 @@ namespace RockPaperScissorsLizardSpockUltimate
             return yourAttack;
         }
 
-        static Attack YourAttack(int attackIndex)
+        static Attack YourAttack(int attackIndex, Attack yourAttack, bool hey)
         {
-            Attack yourAttack = WhichAttack(attackIndex);
+            if (hey == true)
+            {                
+                yourAttack = WhichAttack(attackIndex);
+            }
+            else
+            {
+                yourAttack = new None();
+            }
 
             return yourAttack;
         }
 
         static Attack OpponentAttack(int attackIndex)
         {
-            Random opponentAttackGen = new Random();
-            attackIndex = opponentAttackGen.Next(1, 6);
             Attack opponentAttack = WhichAttack(attackIndex);
 
             return opponentAttack;

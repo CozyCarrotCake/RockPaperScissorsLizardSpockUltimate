@@ -12,27 +12,35 @@ namespace RockPaperScissorsLizardSpockUltimate
         public string name;
 
         //Stats
-        public float hp = 100.0f;
+        public double hp = 100.0;
 
-        protected int damage;
-        protected int defense;
+        protected double damage;
+        protected double defense;
         protected double combo;
         protected double criticalHit;
 
 
         public double DoDamage()
         {
-            double theDamage = damage;
+            double theDamage = damage / 10;
 
             return theDamage;
         }
 
-        public double TakeDamage(double takenDamage)
+        public double TakeDamage()
         {
-            takenDamage = takenDamage / defense;
+            double theDamage = defense / 2;
 
-            return takenDamage;
+            return theDamage;
+
+            
         }
 
+
+        public void LostHealth(double takenDamage)
+        {
+            hp -= takenDamage;
+
+        }
     }
 }

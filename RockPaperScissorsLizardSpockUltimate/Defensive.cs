@@ -6,24 +6,17 @@ using System.Threading.Tasks;
 
 namespace RockPaperScissorsLizardSpockUltimate
 {
-    class Paper : Attack
+    class Defensive : Character
     {
-        public Paper()
+
+        public Defensive()
         {
-            name = "Paper";
+            name = "";
 
-            againstRock = 1;
-            againstPaper = 0;
-            againstScissors = -1;
-            againstLizard = -1;
-            againstSpock = 1;
-
-
-            damage = 30;
+            damage = 25;
             defense = 50;
             combo = 1.25;
             criticalHit = 30;
         }
-
     }
 }

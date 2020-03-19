@@ -46,8 +46,10 @@
     <Compile Include="Attack.cs" />
     <Compile Include="Block.cs" />
     <Compile Include="Character.cs" />
+    <Compile Include="Defensive.cs" />
     <Compile Include="Lizard.cs" />
     <Compile Include="None.cs" />
+    <Compile Include="Offensive.cs" />
     <Compile Include="Paper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

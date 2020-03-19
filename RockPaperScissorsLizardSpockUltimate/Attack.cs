@@ -53,16 +53,18 @@ namespace RockPaperScissorsLizardSpockUltimate
 
         public double DoDamage()
         {
-            double theDamage = damage;
+            double theDamage = damage / 10;
 
             return theDamage;
         }
 
-        public double TakeDamage(double takenDamage)
+        public double TakeDamage()
         {
-            takenDamage = takenDamage / defense;
+            double theDamage = defense / 10;
 
-            return takenDamage;
+            return theDamage;
+
+            
         }
 
     }

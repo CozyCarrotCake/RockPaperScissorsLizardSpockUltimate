@@ -21,8 +21,8 @@ namespace RockPaperScissorsLizardSpockUltimate
             
             damage = 70;
             defense = 30;
-            combo = 0.17;
-            criticalHit = 0.25;
+            combo = 1.17;
+            criticalHit = 25;
         }
 
 

@@ -11,7 +11,7 @@ namespace RockPaperScissorsLizardSpockUltimate
 
         public Defensive()
         {
-            name = "";
+            name = "D";
 
             damage = 25;
             defense = 50;

@@ -15,13 +15,23 @@ namespace RockPaperScissorsLizardSpockUltimate
             Character yourChar = new Character();
             Character opponentChar = new Character();
 
+            List<Character> characters = new List<Character>();
+
+            characters.Add(new TheBoxer());
+            characters.Add(new TheSledgehammer());
+            characters.Add(new TheSniper());
+            characters.Add(new TheCat());
+            characters.Add(new TheShield());
+            characters.Add(new TheBreaker());
+            characters.Add(new TheQuick());
+            //characters.Add(new TheSledgehammer());
+
 
             Intro();
 
-            ChooseCharacter(yourChar);
+            yourChar = ChooseCharacter(yourChar, characters);
 
-            RandomCharacter(opponentChar);
-
+            opponentChar = RandomCharacter(opponentChar, characters);
 
             Fight(yourChar, opponentChar);
             
@@ -38,16 +48,25 @@ namespace RockPaperScissorsLizardSpockUltimate
         }
 
 
-        static Character ChooseCharacter(Character yourChar)
-        {
 
-            Console.WriteLine("Choose a character!");
+        //Choosing CHaracters
+        static Character ChooseCharacter(Character yourChar, List<Character> characters)
+        {
+            
+
+            Console.WriteLine("Choose your character! Press the number of the character you want and enter!");
+
+            for (int i = 0; i < 7; i++)
+            {
+                characters[i].Info(i);
+
+            }
 
             string charSelection = Console.ReadLine();
             int charIndex;
             bool charSuccess = int.TryParse(charSelection, out charIndex);
 
-            while (charSuccess == false || charIndex < 1 || charIndex > 12)
+            while (charSuccess == false || charIndex < 1 || charIndex > 8)
             {
                 Console.WriteLine("Please write the number of one of the characters!");
                 charSelection = Console.ReadLine();
@@ -55,28 +74,27 @@ namespace RockPaperScissorsLizardSpockUltimate
 
             }
 
-            if (charIndex < 7)
-            {
-                yourChar = new Offensive();
-            }
-            else
-            {
-                yourChar = new Defensive();
-            }
+            Console.Clear();
 
-            Console.WriteLine("Allright you chose CHARACTER");
+            yourChar = characters[charIndex - 1];
+
+            Console.WriteLine("Allright you chose " + yourChar.name);
             //Make 3 times
 
             return yourChar;
         }
 
 
-        static Character RandomCharacter(Character opponentChar)
+        static Character RandomCharacter(Character opponentChar, List<Character> characters)
         {
 
+            Random charGen = new Random();
 
+            int charIndex = charGen.Next(1, 9);
 
-            Console.WriteLine("Your opponent iiiiis CHARACTER");
+            opponentChar = characters[charIndex - 1];
+
+            Console.WriteLine("Your opponent iiiiis " + opponentChar.name);
 
             Console.WriteLine("Time to fight!");
 
@@ -86,6 +104,7 @@ namespace RockPaperScissorsLizardSpockUltimate
 
 
 
+        // The Battle
         static void Fight(Character yourChar, Character opponentChar)
         {
             double damageDealt = 10;
@@ -168,6 +187,7 @@ namespace RockPaperScissorsLizardSpockUltimate
 
 
 
+        //Choosing Attacks
         static int ChooseAttack(int attackIndex, Attack yourAttack)
         {
             
@@ -237,6 +257,8 @@ namespace RockPaperScissorsLizardSpockUltimate
 
 
 
+        //Check For Winner
+
         static int WinOrLoose(int attackIndex, Attack yourAttack)
         {
             int wOL = yourAttack.Against(attackIndex);
@@ -246,13 +268,33 @@ namespace RockPaperScissorsLizardSpockUltimate
 
 
 
-
+        //Calculating Damage
 
         static void DealDamage(double damageDealt, Attack yourAttack, Attack opponentAttack, Character yourChar, Character opponentChar)
         {
+            //main damage
+            damageDealt += yourAttack.DoDamage() + yourChar.DoDamage();
 
-            damageDealt = damageDealt + yourAttack.DoDamage() + yourChar.DoDamage();
+
             //combo
+            yourChar.Streak = 1;
+            double comboValue = Math.Pow((yourAttack.combo * yourChar.combo), yourChar.Streak);
+            Console.WriteLine(comboValue);
+            damageDealt *= comboValue;
+
+
+            //crits
+            Random critGen = new Random();
+            int hit = critGen.Next(100);
+
+            if (hit <= (yourAttack.criticalHit + yourChar.criticalHit) / 2)
+            {
+                Console.WriteLine("It's a crit!");
+                damageDealt *= 2;
+            }
+            
+            
+
 
             damageDealt = damageDealt - opponentAttack.TakeDamage() + opponentChar.TakeDamage();
 
@@ -268,10 +310,30 @@ namespace RockPaperScissorsLizardSpockUltimate
 
         static void TakeDamage(double damageDealt, Attack yourAttack, Attack opponentAttack, Character yourChar, Character opponentChar)
         {
+            // main damage
             damageDealt = damageDealt + opponentAttack.DoDamage() + opponentChar.DoDamage();
-            
-            //combo
 
+            //combo
+            opponentChar.Streak = 1;
+            double comboValue = Math.Pow((opponentAttack.combo * opponentChar.combo), opponentChar.Streak);
+            Console.WriteLine(comboValue);
+            damageDealt *= comboValue;
+
+
+            //crit
+            Random critGen = new Random();
+            int hit = critGen.Next(100);
+
+            if (hit <= (opponentAttack.criticalHit + opponentChar.criticalHit) / 2)
+            {
+                Console.WriteLine("It's a crit!");
+                damageDealt *= 2;
+            }
+
+
+
+
+            //taken
             damageDealt = damageDealt - yourAttack.TakeDamage() + yourChar.TakeDamage();
 
             if (damageDealt < 5)

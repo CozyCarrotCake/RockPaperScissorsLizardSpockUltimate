@@ -43,10 +43,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assassin.cs" />
     <Compile Include="Attack.cs" />
     <Compile Include="Block.cs" />
+    <Compile Include="Blocker.cs" />
+    <Compile Include="Bruiser.cs" />
     <Compile Include="Character.cs" />
     <Compile Include="Defensive.cs" />
+    <Compile Include="Evader.cs" />
     <Compile Include="Lizard.cs" />
     <Compile Include="None.cs" />
     <Compile Include="Offensive.cs" />
@@ -58,6 +62,13 @@
     <Compile Include="Snap.cs" />
     <Compile Include="Special.cs" />
     <Compile Include="Spock.cs" />
+    <Compile Include="TheBoxer.cs" />
+    <Compile Include="TheBreaker.cs" />
+    <Compile Include="TheCat.cs" />
+    <Compile Include="TheQuick.cs" />
+    <Compile Include="TheShield.cs" />
+    <Compile Include="TheSledgehammer.cs" />
+    <Compile Include="TheSniper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

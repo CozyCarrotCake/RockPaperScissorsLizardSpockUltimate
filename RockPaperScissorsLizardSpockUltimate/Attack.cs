@@ -22,12 +22,18 @@ namespace RockPaperScissorsLizardSpockUltimate
         //Stats
         public double damage;
         protected double defense;
-        protected double combo;
-        protected double criticalHit;
+        public double combo { get; protected set; }
+        public int criticalHit { get; protected set; }
 
-
+        //Method Thingy
         protected double theDamage;
 
+
+
+
+        //METHODS
+
+        // Check Wins
         public int Against(int attackIndex)
         {
             if (attackIndex == 1)
@@ -53,18 +59,19 @@ namespace RockPaperScissorsLizardSpockUltimate
         }
 
 
+        //Damage Methods
+
         public double DoDamage ()
         {
             theDamage = damage / 20;
             return theDamage;
         }
 
-
         public double TakeDamage()
         {
                 theDamage = defense / 20;
                 return theDamage;
         }
-
+        
     }
 }

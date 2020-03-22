@@ -19,13 +19,13 @@ namespace RockPaperScissorsLizardSpockUltimate
         public double combo { get; protected set; }
         public int criticalHit { get; protected set; }
 
+        public Attack behaviorAttack { get; protected set; }
+
 
         // Thingys
         protected double theDamage;
-
-
-        //
-        protected int streak;
+               
+        protected int streak = 0;
 
 
 
@@ -33,8 +33,7 @@ namespace RockPaperScissorsLizardSpockUltimate
 
         public virtual void Info(int index)
         {
-            Console.WriteLine();
-            Console.WriteLine(index + 1 + ". " + name);
+            
             if (index < 4)
             {
                 Console.Write("Offensive | ");
@@ -59,9 +58,6 @@ namespace RockPaperScissorsLizardSpockUltimate
                     Console.WriteLine("Evader");
                 }
             }
-            
-
-
         }
 
 
@@ -103,12 +99,33 @@ namespace RockPaperScissorsLizardSpockUltimate
             }
             set
             {
-                streak = 1 + (value / 5);
+                if (value != 0)
+                {
+                    streak += value;
+                }
+                else
+                {
+                    streak = value;
+                }
+                
             }
         }
 
 
 
-        //Specialised
+        //Special
+        public void BehaviorSpecial()
+        {
+            Console.WriteLine("1. " + behaviorAttack.name);
+        }
+
+
+        //Passives
+        public virtual void Passive()
+        {
+
+        }
+
+
     }
 }

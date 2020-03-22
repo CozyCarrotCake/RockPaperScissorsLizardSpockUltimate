@@ -19,7 +19,7 @@ namespace RockPaperScissorsLizardSpockUltimate
         {
             base.Info(Index);
 
-            Console.WriteLine("Combo + " + 0.15);
+            Console.WriteLine("Combo + 0.15");
 
         }
 

@@ -21,7 +21,7 @@ namespace RockPaperScissorsLizardSpockUltimate
         {
             base.Info(Index);
             
-            Console.WriteLine("Critical Hit + " + 15);
+            Console.WriteLine("Critical Hit + 15%");
 
         }
     }

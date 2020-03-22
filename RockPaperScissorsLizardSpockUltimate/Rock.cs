@@ -24,8 +24,16 @@ namespace RockPaperScissorsLizardSpockUltimate
             defense = 90;
             combo = 1.15;
             criticalHit = 15;
+            
         }
 
+
+
+        public override void Transform()
+        {
+            firstTransform = new TraBoulder();
+            secondTransform = new TraHardRock();
+        }
 
         
 

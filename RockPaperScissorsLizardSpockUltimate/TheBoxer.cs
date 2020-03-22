@@ -11,8 +11,7 @@ namespace RockPaperScissorsLizardSpockUltimate
         public TheBoxer()
         {
             name = "The Boxer";
-
-            criticalHit += 15;
+            
             combo += 0.15;
         }
 
@@ -21,7 +20,6 @@ namespace RockPaperScissorsLizardSpockUltimate
             base.Info(Index);
 
             Console.WriteLine("Combo + 0.15");
-            Console.WriteLine("Critical Hit + 15");
 
         }
 

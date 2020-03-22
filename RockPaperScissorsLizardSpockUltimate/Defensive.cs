@@ -11,12 +11,12 @@ namespace RockPaperScissorsLizardSpockUltimate
 
         public Defensive()
         {
-            name = "D";
-
             damage = 25;
             defense = 50;
-            combo = 1.25;
-            criticalHit = 30;
+            combo = 1.15;
+            criticalHit = 15;
+
+            behaviorAttack = new Block();
         }
     }
 }

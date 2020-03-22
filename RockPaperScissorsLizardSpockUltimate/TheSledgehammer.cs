@@ -13,7 +13,6 @@ namespace RockPaperScissorsLizardSpockUltimate
             name = "The Sledgehammer";
 
             damage *= 1.2;
-            criticalHit += 15;
         }
 
         public override void Info(int Index)
@@ -21,7 +20,6 @@ namespace RockPaperScissorsLizardSpockUltimate
             base.Info(Index);
 
             Console.WriteLine("Damage + 20%" );
-            Console.WriteLine("Critical Hit + 15");
 
         }
     }

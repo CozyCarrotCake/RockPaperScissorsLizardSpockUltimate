@@ -7,16 +7,17 @@ using System.Threading.Tasks;
 namespace RockPaperScissorsLizardSpockUltimate
 {
     class Program
-
-        
     {
         static void Main(string[] args)
         {
+            //Chosen Characters
             Character yourChar = new Character();
+            List<Character> yourCharacters = new List<Character>();
             Character opponentChar = new Character();
+            List<Character> opponentCharacters = new List<Character>();
 
+            //List of the avaible Characters
             List<Character> characters = new List<Character>();
-
             characters.Add(new TheBoxer());
             characters.Add(new TheSledgehammer());
             characters.Add(new TheSniper());
@@ -26,14 +27,22 @@ namespace RockPaperScissorsLizardSpockUltimate
             characters.Add(new TheQuick());
             //characters.Add(new TheSledgehammer());
 
+            bool didWin;
+
+
+            //The Methods
 
             Intro();
 
-            yourChar = ChooseCharacter(yourChar, characters);
+            yourCharacters = ChooseCharacter(yourCharacters, characters);
 
-            opponentChar = RandomCharacter(opponentChar, characters);
+            opponentCharacters = RandomCharacter(opponentCharacters, characters);
 
-            Fight(yourChar, opponentChar);
+            MatchUp(yourCharacters, opponentCharacters);
+
+            didWin = Fight(yourCharacters, opponentCharacters);
+
+            End(didWin);
             
             
             Console.ReadLine();
@@ -41,72 +50,182 @@ namespace RockPaperScissorsLizardSpockUltimate
 
 
 
+        //Intro!
         static void Intro()
         {
             Console.WriteLine("Hello and welcome to TITLE");
-
+            Console.ReadLine();
         }
 
 
 
         //Choosing CHaracters
-        static Character ChooseCharacter(Character yourChar, List<Character> characters)
+        static List<Character> ChooseCharacter(List<Character> yourCharacters, List<Character> characters)
         {
-            
-
-            Console.WriteLine("Choose your character! Press the number of the character you want and enter!");
+            Console.Clear();
+            Console.WriteLine("You will now choose your 3 fighters!");
+            Console.WriteLine("Choose your FIRST fighter! Press the number of the character for its information!");
+            Console.WriteLine("Your fighters:");
+            Console.WriteLine("1. ");
+            Console.WriteLine("2. ");
+            Console.WriteLine("3. ");
+            Console.WriteLine("");
 
             for (int i = 0; i < 7; i++)
             {
-                characters[i].Info(i);
+
+                Console.WriteLine();
+                Console.WriteLine(i + 1 + ". " + characters[i].name);
+                
 
             }
+
 
             string charSelection = Console.ReadLine();
             int charIndex;
-            bool charSuccess = int.TryParse(charSelection, out charIndex);
+            
+            string[] yourCharactersNames = new string[3]; //Dont wanna deList
+            
 
-            while (charSuccess == false || charIndex < 1 || charIndex > 8)
+            while (1 == 1)
             {
-                Console.WriteLine("Please write the number of one of the characters!");
+                bool charSuccess = int.TryParse(charSelection, out charIndex);
+                while (charSuccess == false || charIndex < 1 || charIndex > 8)
+                {
+                    Console.WriteLine("Please write the number of one of the characters!");
+                    charSelection = Console.ReadLine();
+                    charSuccess = int.TryParse(charSelection, out charIndex);
+
+                }
+
+                Console.Clear();
+                Console.WriteLine("Your fighters:");
+                Console.WriteLine("1. " + yourCharactersNames[0]);
+                Console.WriteLine("2. " + yourCharactersNames[1]);
+                Console.WriteLine("3. " + yourCharactersNames[2]);
+                Console.WriteLine("");
+
+                for (int i = 0; i < characters.Count; i++)
+                {
+
+                    Console.WriteLine();
+                    Console.WriteLine(i + 1 + ". " + characters[i].name);
+                    if (i == charIndex - 1)
+                    {
+                        characters[i].Info(i);
+                    }
+
+                }
+                Console.WriteLine("");
+                Console.WriteLine("Do you want to choose " + characters[charIndex-1].name + "? Press Enter!");
+                Console.WriteLine("If you want to see another characters information Press their number!");
+
                 charSelection = Console.ReadLine();
-                charSuccess = int.TryParse(charSelection, out charIndex);
+                if (charSelection == "")
+                {
+                    Console.Clear();
 
+                    Character yourChar = characters[charIndex - 1];
+
+                    Console.WriteLine("Allright you chose " + yourChar.name);
+                    charIndex = 0;
+
+                    characters.Remove(yourChar);
+                    yourCharacters.Add(yourChar);
+
+                    if (yourCharacters.Count == 1)
+                    {
+                        yourCharactersNames[0] = yourChar.name;
+                        Console.WriteLine("Choose your SECOND fighter! Press the number of the character for its information!");
+
+                    }
+                    else if (yourCharacters.Count == 2)
+                    {
+                        yourCharactersNames[1] = yourChar.name;
+                        Console.WriteLine("Choose your THIRD fighter! Press the number of the character for its information!");
+                    }
+                    else
+                    {
+                        yourCharactersNames[2] = yourChar.name;
+                        break;
+                    }
+
+                    Console.WriteLine("");
+                    Console.WriteLine("Your fighters:");
+                    Console.WriteLine("1. " + yourCharactersNames[0]);
+                    Console.WriteLine("2. " + yourCharactersNames[1]);
+                    Console.WriteLine("3. " + yourCharactersNames[2]);
+                    Console.WriteLine("");
+
+                    for (int i = 0; i < characters.Count; i++)
+                    {
+
+                        Console.WriteLine();
+                        Console.WriteLine(i + 1 + ". " + characters[i].name);
+                        if (i == charIndex - 1)
+                        {
+                            characters[i].Info(i);
+                        }
+
+                    }
+
+                    charSelection = Console.ReadLine();
+
+                }
+                
+
+                
             }
+            
 
-            Console.Clear();
-
-            yourChar = characters[charIndex - 1];
-
-            Console.WriteLine("Allright you chose " + yourChar.name);
-            //Make 3 times
-
-            return yourChar;
+            return yourCharacters;
         }
 
-
-        static Character RandomCharacter(Character opponentChar, List<Character> characters)
+        
+        static List<Character> RandomCharacter(List<Character> opponentCharacters, List<Character> characters)
         {
 
             Random charGen = new Random();
 
-            int charIndex = charGen.Next(1, 9);
+            for(int i = 0; i < 3; i++)
+            {
+                int charIndex = charGen.Next(0, characters.Count);
+                opponentCharacters.Add(characters[charIndex]);
+            }            
 
-            opponentChar = characters[charIndex - 1];
+            return opponentCharacters;
+        }
 
-            Console.WriteLine("Your opponent iiiiis " + opponentChar.name);
 
+        //Just writes the teams
+        static void MatchUp(List<Character> yourCharacters, List<Character> opponentCharacters)
+        {
+            Console.Clear();
+            Console.WriteLine("Your Team:");
+            for (int i = 0; i < 3; i++)
+            {
+                Console.WriteLine(yourCharacters[i].name);
+            }
+
+            Console.WriteLine("");
+            Console.WriteLine("Your Opponent's Team: ");
+            for (int i = 0; i < 3; i++)
+            {
+                Console.WriteLine(opponentCharacters[i].name);
+            }
+
+            Console.WriteLine("");
             Console.WriteLine("Time to fight!");
-
-            return opponentChar;
+            Console.ReadLine();
         }
 
 
 
-
         // The Battle
-        static void Fight(Character yourChar, Character opponentChar)
+        static bool Fight(List<Character> yourCharacters, List<Character> opponentCharacters)
         {
+            bool didWin;
+
             double damageDealt = 10;
 
             int attackIndex = 0;
@@ -118,13 +237,22 @@ namespace RockPaperScissorsLizardSpockUltimate
             int wOL;
             
 
-            while (yourChar.hp > 0 && opponentChar.hp > 0)
+            Character yourChar = yourCharacters[0];
+            yourCharacters.Remove(yourChar);
+            Character opponentChar = opponentCharacters[0];
+            opponentCharacters.Remove(opponentChar);
+            Console.WriteLine("First off, " + yourChar.name + " vs. " + opponentChar.name);
+
+            while (1==1)
             {
+                
+                //Remaining HP
                 Console.WriteLine("Your remaining HP: " + yourChar.hp);
                 Console.WriteLine("Your opponents remaining HP: " + opponentChar.hp);
 
 
-                //Choose Attack
+
+                //Choose Your Attack
 
                 Console.WriteLine("Choose your attack!");
 
@@ -144,6 +272,11 @@ namespace RockPaperScissorsLizardSpockUltimate
 
                 yourAttack = YourAttack(attackIndex, yourAttack, didChoose);
 
+
+
+
+                //Opponents Attack
+
                 if (didChoose == true)
                 {
                     //Make smart
@@ -152,14 +285,67 @@ namespace RockPaperScissorsLizardSpockUltimate
                     opponentAttack = OpponentAttack(attackIndex);
                 }
                 
+
+
+
                 
+
+                // Attack UI
+
                 Console.WriteLine("You chose " + yourAttack.name);
                 Console.WriteLine("Your opponent chose " + opponentAttack.name);
 
 
-                
+
+
+
+
+                //TRANSFORMATION
+
+                Console.WriteLine("");
+                Console.WriteLine("Do you wanna transform your attack?");
+
+                //Writes out and creates the attacks in the Classes
+                yourChar.BehaviorSpecial();
+                yourAttack.Transform();
+                yourAttack.Transformations();
+
+                //Choose transformation
+                string transform = Console.ReadLine();
+                int transformIndex;
+                bool transformSuccess = int.TryParse(transform, out transformIndex);
+                if (transformSuccess == false || transformIndex < 1 || transformIndex > 3)
+                {
+                    Console.WriteLine("You chose not to transform!");
+                }
+                else if (transformIndex == 1)
+                {
+                    Console.WriteLine("You chose to transform your " + yourAttack.name + " into a " + yourChar.behaviorAttack.name);
+                    yourAttack = yourChar.behaviorAttack;
+                }
+                else if (transformIndex == 2)
+                {
+                    Console.WriteLine("You chose to transform your " + yourAttack.name + " into a " + yourAttack.firstTransform.name);
+                    yourAttack = yourAttack.firstTransform;
+                }
+                else if (transformIndex == 3)
+                {
+                    Console.WriteLine("You chose to transform your " + yourAttack.name + " into a " + yourAttack.secondTransform.name);
+                    yourAttack = yourAttack.secondTransform;
+                }
+
+
+
+
+
+
+
+
+                // Which attack wins
                 wOL = WinOrLoose(attackIndex, yourAttack);
 
+
+                // Deal the Damage
                 if (wOL == 1)
                 {
                     Console.WriteLine("You Win!");
@@ -177,24 +363,74 @@ namespace RockPaperScissorsLizardSpockUltimate
                     TakeDamage(damageDealt, yourAttack, opponentAttack, yourChar, opponentChar);
 
                 }
+                
+                Console.ReadLine();
+
+
+
+
+
+                //If your fighter dies
+                if (yourChar.hp < 0)
+                {
+                    Console.Clear();
+
+                    if (yourCharacters.Count != 0)
+                    {
+                        Console.WriteLine(yourChar.name + " can no longer fight!");
+                        yourChar = yourCharacters[0];
+                        yourCharacters.Remove(yourChar);
+                        Console.WriteLine(yourChar.name + " jumps in!");
+
+                    }
+                    else
+                    {
+                        Console.WriteLine("All your fighters are unable to continue!");
+                        didWin = false;
+                        break;
+                    }
+
+                    Console.ReadLine();
+                }
+
+
+
+                //If opponent fighter dies
+
+                if (opponentChar.hp < 0)
+                {
+                    Console.Clear();
+
+                    if (opponentCharacters.Count != 0)
+                    {
+                        Console.WriteLine(opponentChar.name + " can no longer fight!");
+                        opponentChar = opponentCharacters[0];
+                        opponentCharacters.Remove(opponentChar);
+                        Console.WriteLine(opponentChar.name + " jumps in!");
+                    }
+                    else
+                    {
+                        Console.WriteLine("All your opponent's fighters are unable to continue!");
+                        didWin = true;
+                        break;
+                    }
+
+                    Console.ReadLine();  
+                }
+
+                Console.Clear();
 
             }
-            
 
+            return didWin;
 
         }
 
 
 
 
-        //Choosing Attacks
-        static int ChooseAttack(int attackIndex, Attack yourAttack)
-        {
-            
 
-
-            return attackIndex;
-        }
+        //Choosing Attack
 
 
         static Attack FailedAttack()
@@ -256,6 +492,7 @@ namespace RockPaperScissorsLizardSpockUltimate
         }
 
 
+        
 
         //Check For Winner
 
@@ -268,6 +505,7 @@ namespace RockPaperScissorsLizardSpockUltimate
 
 
 
+
         //Calculating Damage
 
         static void DealDamage(double damageDealt, Attack yourAttack, Attack opponentAttack, Character yourChar, Character opponentChar)
@@ -276,7 +514,8 @@ namespace RockPaperScissorsLizardSpockUltimate
             damageDealt += yourAttack.DoDamage() + yourChar.DoDamage();
 
 
-            //combo
+            //combo            
+            opponentChar.Streak = 0;
             yourChar.Streak = 1;
             double comboValue = Math.Pow((yourAttack.combo * yourChar.combo), yourChar.Streak);
             Console.WriteLine(comboValue);
@@ -314,6 +553,7 @@ namespace RockPaperScissorsLizardSpockUltimate
             damageDealt = damageDealt + opponentAttack.DoDamage() + opponentChar.DoDamage();
 
             //combo
+            yourChar.Streak = 0;
             opponentChar.Streak = 1;
             double comboValue = Math.Pow((opponentAttack.combo * opponentChar.combo), opponentChar.Streak);
             Console.WriteLine(comboValue);
@@ -345,6 +585,24 @@ namespace RockPaperScissorsLizardSpockUltimate
             yourChar.LostHealth = damageDealt;
         }
 
+
+
+
+
+        //End
+
+        static void End(bool didWin)
+        {
+            if(didWin == true)
+            {
+                Console.WriteLine("Yay you won!");
+            }
+            else
+            {
+                Console.WriteLine("Shit you lost loser!");
+            }
+
+        }
 
     }
 }

@@ -11,12 +11,12 @@ namespace RockPaperScissorsLizardSpockUltimate
 
         public Offensive()
         {
-            name = "O";
-            
             damage = 50;
             defense = 25;
-            combo = 1.25;
-            criticalHit = 30;
+            combo = 1.15;
+            criticalHit = 15;
+
+            behaviorAttack = new Snap();
         }
     }
 }

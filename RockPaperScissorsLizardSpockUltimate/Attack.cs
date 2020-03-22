@@ -25,8 +25,17 @@ namespace RockPaperScissorsLizardSpockUltimate
         public double combo { get; protected set; }
         public int criticalHit { get; protected set; }
 
+
+        //Transformations
+        public Attack firstTransform { get; protected set; }
+        public Attack secondTransform { get; protected set; }
+
+
         //Method Thingy
         protected double theDamage;
+
+
+
 
 
 
@@ -71,6 +80,21 @@ namespace RockPaperScissorsLizardSpockUltimate
         {
                 theDamage = defense / 20;
                 return theDamage;
+        }
+
+
+        //Transform
+
+        public void Transformations()
+        {
+            Console.WriteLine("2. " + firstTransform.name);
+            Console.WriteLine("3. " + secondTransform.name);
+        }
+
+
+        public virtual void Transform()
+        {
+
         }
         
     }

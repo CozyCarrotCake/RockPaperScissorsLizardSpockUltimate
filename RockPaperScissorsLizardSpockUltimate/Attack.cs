@@ -85,16 +85,24 @@ namespace RockPaperScissorsLizardSpockUltimate
 
         //Transform
 
-        public void Transformations()
+        public void Transformations(int specials) 
         {
-            Console.WriteLine("2. " + firstTransform.name);
-            Console.WriteLine("3. " + secondTransform.name);
+            if (specials > 0)
+            {
+                Console.WriteLine("2. " + firstTransform.name);
+                Console.WriteLine("3. " + secondTransform.name);
+            }
+            else
+            {
+                Console.WriteLine("You've used your 2 specials for this fighter!");
+            }
+            
         }
 
 
         public virtual void Transform()
         {
-
+            //Gets overrode in the subclasses, but needs to be able to get called from program so gets created here.
         }
         
     }

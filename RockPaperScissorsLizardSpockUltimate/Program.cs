@@ -217,6 +217,7 @@ namespace RockPaperScissorsLizardSpockUltimate
             Console.WriteLine("");
             Console.WriteLine("Time to fight!");
             Console.ReadLine();
+            Console.Clear();
         }
 
 
@@ -235,13 +236,15 @@ namespace RockPaperScissorsLizardSpockUltimate
             bool didChoose;
 
             int wOL;
-            
+
+            bool canDoBehavior = true;
 
             Character yourChar = yourCharacters[0];
             yourCharacters.Remove(yourChar);
             Character opponentChar = opponentCharacters[0];
             opponentCharacters.Remove(opponentChar);
             Console.WriteLine("First off, " + yourChar.name + " vs. " + opponentChar.name);
+
 
             while (1==1)
             {
@@ -283,63 +286,109 @@ namespace RockPaperScissorsLizardSpockUltimate
                     Random opponentAttackGen = new Random();
                     attackIndex = opponentAttackGen.Next(1, 6);
                     opponentAttack = OpponentAttack(attackIndex);
+
+
+
+
+                    // Attack UI
+
+                    Console.WriteLine("You chose " + yourAttack.name);
+                    Console.WriteLine("Your opponent chose " + opponentAttack.name);
+
+
+
+
+
+
+                    //TRANSFORMATION
+
+                    Console.WriteLine("");
+                    Console.WriteLine("Do you wanna transform your attack?");
+
+                    //Writes out and creates the attacks in the Classes
+
+
+
+                    yourChar.BehaviorSpecial(canDoBehavior);
+                    yourAttack.Transform();
+                    yourAttack.Transformations(yourChar.Specials);
+                    
+
+
+                    //Choose transformation
+                    string transform = Console.ReadLine();
+                    int transformIndex;
+                    bool transformSuccess = int.TryParse(transform, out transformIndex);
+                    if (transformSuccess == false || transformIndex < 1 || transformIndex > 3)
+                    {
+                        Console.WriteLine("You chose not to transform!");
+                    }
+                    else if (canDoBehavior == true)
+                    {
+                        if (transformIndex == 1)
+                        {
+                            Console.WriteLine("You chose to transform your " + yourAttack.name + " into a " + yourChar.behaviorAttack.name);
+                            yourAttack = yourChar.behaviorAttack;
+                            canDoBehavior = false;
+                        }
+                    }
+                    else if (yourChar.Specials > 0)
+                    {
+                        if (transformIndex == 2)
+                        {
+                            Console.WriteLine("You chose to transform your " + yourAttack.name + " into a " + yourAttack.firstTransform.name);
+                            yourAttack = yourAttack.firstTransform;
+                            yourChar.Specials = 1;
+                        }
+                        else if (transformIndex == 3)
+                        {
+                            Console.WriteLine("You chose to transform your " + yourAttack.name + " into a " + yourAttack.secondTransform.name);
+                            yourAttack = yourAttack.secondTransform;
+                            yourChar.Specials = 1;
+                        }
+                    }
+                    
+
+
+
+
+                    // Enemy transformation
+                    //Somethings wrong!!!!!
+                    //Also make it thrice only!!!!
+
+                    Random transformGen = new Random();
+                    int transformInt = transformGen.Next(100);
+                    if (transformInt < 25)
+                    {
+                        transformInt = transformGen.Next(0, 3);
+                        if (transformInt == 0)
+                        {
+                            Console.WriteLine("Your enemy chose to transform their " + opponentAttack.name + " into a " + opponentChar.behaviorAttack.name);
+                            opponentAttack = opponentChar.behaviorAttack;
+                        }
+                        else if (transformInt == 1)
+                        {
+                            Console.WriteLine("Your opponent chose to transform your " + opponentAttack.name + " into a " + opponentAttack.firstTransform.name);
+                            opponentAttack = opponentAttack.firstTransform;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Your opponent chose to transform your " + opponentAttack.name + " into a " + opponentAttack.secondTransform.name);
+                            opponentAttack = opponentAttack.secondTransform;
+                        }
+                    }
+                    else
+                    {
+                        Console.WriteLine("Your opponent chose not to transform!");
+                    }
+                    
+                    
+
                 }
                 
 
 
-
                 
-
-                // Attack UI
-
-                Console.WriteLine("You chose " + yourAttack.name);
-                Console.WriteLine("Your opponent chose " + opponentAttack.name);
-
-
-
-
-
-
-                //TRANSFORMATION
-
-                Console.WriteLine("");
-                Console.WriteLine("Do you wanna transform your attack?");
-
-                //Writes out and creates the attacks in the Classes
-                yourChar.BehaviorSpecial();
-                yourAttack.Transform();
-                yourAttack.Transformations();
-
-                //Choose transformation
-                string transform = Console.ReadLine();
-                int transformIndex;
-                bool transformSuccess = int.TryParse(transform, out transformIndex);
-                if (transformSuccess == false || transformIndex < 1 || transformIndex > 3)
-                {
-                    Console.WriteLine("You chose not to transform!");
-                }
-                else if (transformIndex == 1)
-                {
-                    Console.WriteLine("You chose to transform your " + yourAttack.name + " into a " + yourChar.behaviorAttack.name);
-                    yourAttack = yourChar.behaviorAttack;
-                }
-                else if (transformIndex == 2)
-                {
-                    Console.WriteLine("You chose to transform your " + yourAttack.name + " into a " + yourAttack.firstTransform.name);
-                    yourAttack = yourAttack.firstTransform;
-                }
-                else if (transformIndex == 3)
-                {
-                    Console.WriteLine("You chose to transform your " + yourAttack.name + " into a " + yourAttack.secondTransform.name);
-                    yourAttack = yourAttack.secondTransform;
-                }
-
-
-
-
-
-
-
 
                 // Which attack wins
                 wOL = WinOrLoose(attackIndex, yourAttack);

@@ -6,17 +6,15 @@ using System.Threading.Tasks;
 
 namespace RockPaperScissorsLizardSpockUltimate
 {
-    class TraBoulder : Rock
+    class TraDragon : Lizard
     {
-        public TraBoulder()
+        public TraDragon()
         {
-            name = "Boulder";
+            name = "Dragon";
 
-            againstPaper += 1;
-            againstRock += 1;
+            againstSpock += 1;
+            againstScissors += 1;
             damage += 20;
         }
-
-
     }
 }

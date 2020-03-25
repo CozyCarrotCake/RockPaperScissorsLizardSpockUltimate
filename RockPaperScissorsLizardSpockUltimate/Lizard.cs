@@ -24,5 +24,11 @@ namespace RockPaperScissorsLizardSpockUltimate
             criticalHit = 10;
         }
 
+        public override void Transform()
+        {
+            firstTransform = new TraDragon();
+            secondTransform = new TraTurtle();
+        }
+
     }
 }

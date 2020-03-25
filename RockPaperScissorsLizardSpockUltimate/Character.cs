@@ -27,6 +27,7 @@ namespace RockPaperScissorsLizardSpockUltimate
                
         protected int streak = 0;
 
+        protected int specials = 2;
 
 
         //METHODS
@@ -114,9 +115,35 @@ namespace RockPaperScissorsLizardSpockUltimate
 
 
         //Special
-        public void BehaviorSpecial()
+        public void BehaviorSpecial(bool behaviorSpecial)
         {
-            Console.WriteLine("1. " + behaviorAttack.name);
+            if (behaviorSpecial == true)
+            {
+                Console.WriteLine("1. " + behaviorAttack.name);
+            }
+            else
+            {
+                Console.WriteLine("You have used your Behavior attack for this fight!");
+            }
+        }
+
+
+        //How Many Specials
+        public int Specials
+        {
+            get
+            {
+                return specials;
+            }
+            set
+            {
+                if (specials > 0)
+                {
+                    specials-= value;
+                }
+                
+            }
+            
         }
 
 
@@ -125,6 +152,9 @@ namespace RockPaperScissorsLizardSpockUltimate
         {
 
         }
+
+
+
 
 
     }

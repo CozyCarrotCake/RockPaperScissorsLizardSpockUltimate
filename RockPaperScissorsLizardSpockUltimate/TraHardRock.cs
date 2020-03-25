@@ -12,7 +12,8 @@ namespace RockPaperScissorsLizardSpockUltimate
         {
             name = "Hard Rock";
 
-            againstSpock = 0;
+            againstSpock += 1;
+            againstLizard += 1;
             combo += 0.2;
         }
 

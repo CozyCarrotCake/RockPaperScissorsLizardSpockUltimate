@@ -6,17 +6,15 @@ using System.Threading.Tasks;
 
 namespace RockPaperScissorsLizardSpockUltimate
 {
-    class TraBoulder : Rock
+    class TraBoi : Paper
     {
-        public TraBoulder()
+        public TraBoi()
         {
-            name = "Boulder";
+            name = "Boi";
 
-            againstPaper += 1;
-            againstRock += 1;
-            damage += 20;
+            againstLizard += 1;
+            againstSpock += 1;
+            criticalHit += 20;
         }
-
-
     }
 }

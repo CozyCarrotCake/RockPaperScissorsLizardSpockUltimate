@@ -69,8 +69,16 @@
     <Compile Include="TheShield.cs" />
     <Compile Include="TheSledgehammer.cs" />
     <Compile Include="TheSniper.cs" />
+    <Compile Include="TraBoi.cs" />
     <Compile Include="TraBoulder.cs" />
+    <Compile Include="TraDragon.cs" />
+    <Compile Include="TraEdward.cs" />
+    <Compile Include="TraEyeStabber.cs" />
+    <Compile Include="TraGun.cs" />
     <Compile Include="TraHardRock.cs" />
+    <Compile Include="TraKhaaan.cs" />
+    <Compile Include="TraTree.cs" />
+    <Compile Include="TraTurtle.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

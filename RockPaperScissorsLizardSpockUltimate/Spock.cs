@@ -23,5 +23,11 @@ namespace RockPaperScissorsLizardSpockUltimate
             combo = 1.12;
             criticalHit = 15;
         }
+
+        public override void Transform()
+        {
+            firstTransform = new TraGun();
+            secondTransform = new TraKhaaan();
+        }
     }
 }

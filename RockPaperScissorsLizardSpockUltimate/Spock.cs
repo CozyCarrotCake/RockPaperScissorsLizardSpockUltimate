@@ -13,9 +13,9 @@ namespace RockPaperScissorsLizardSpockUltimate
             name = "Spock";
 
             againstRock = 1;
-            againstPaper = -1;
+            againstPaper = 0;
             againstScissors = 1;
-            againstLizard = -1;
+            againstLizard = 0;
             againstSpock = 0;
 
             damage = 70;

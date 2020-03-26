@@ -10,13 +10,13 @@ namespace RockPaperScissorsLizardSpockUltimate
     {
         public Block()
         {
-            name = "Block";
+            name = "Block"; // isa shit
 
-            againstRock = 0;
-            againstPaper = 0;
-            againstScissors = 0;
-            againstLizard = 0;
-            againstSpock = 0;
+            againstRock = 1;
+            againstPaper = 1;
+            againstScissors = 1;
+            againstLizard = 1;
+            againstSpock = 1;
 
             damage = 0;
             defense = 100;

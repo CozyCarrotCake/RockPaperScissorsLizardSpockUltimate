@@ -13,11 +13,11 @@ namespace RockPaperScissorsLizardSpockUltimate
         {
             name = "None";
 
-            againstRock = -1;
-            againstPaper = -1;
-            againstScissors = -1;
-            againstLizard = -1;
-            againstSpock = -1;
+            againstRock = -2;
+            againstPaper = -2;
+            againstScissors = -2;
+            againstLizard = -2;
+            againstSpock = -2;
 
             damage = 0;
             defense = 0;

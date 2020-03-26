@@ -15,10 +15,10 @@ namespace RockPaperScissorsLizardSpockUltimate
             name = "Rock";
 
             againstRock = 0;
-            againstPaper = -1;
+            againstPaper = 0;
             againstScissors = 1;
             againstLizard = 1;
-            againstSpock = -1;
+            againstSpock = 0;
 
             damage = 80;
             defense = 90;

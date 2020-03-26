@@ -14,8 +14,8 @@ namespace RockPaperScissorsLizardSpockUltimate
 
             againstRock = 1;
             againstPaper = 0;
-            againstScissors = -1;
-            againstLizard = -1;
+            againstScissors = 0;
+            againstLizard = 0;
             againstSpock = 1;
 
 

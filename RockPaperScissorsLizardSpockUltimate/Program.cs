@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 
 namespace RockPaperScissorsLizardSpockUltimate
 {
@@ -65,6 +66,7 @@ namespace RockPaperScissorsLizardSpockUltimate
             Console.Clear();
             Console.WriteLine("You will now choose your 3 fighters!");
             Console.WriteLine("Choose your FIRST fighter! Press the number of the character for its information!");
+            Console.WriteLine("");
             Console.WriteLine("Your fighters:");
             Console.WriteLine("1. ");
             Console.WriteLine("2. ");
@@ -99,6 +101,9 @@ namespace RockPaperScissorsLizardSpockUltimate
                 }
 
                 Console.Clear();
+                Console.WriteLine("Do you want to choose " + characters[charIndex - 1].name + "? Press Enter!");
+                Console.WriteLine("If you want to see another characters information Press their number!");
+                Console.WriteLine("");
                 Console.WriteLine("Your fighters:");
                 Console.WriteLine("1. " + yourCharactersNames[0]);
                 Console.WriteLine("2. " + yourCharactersNames[1]);
@@ -117,8 +122,7 @@ namespace RockPaperScissorsLizardSpockUltimate
 
                 }
                 Console.WriteLine("");
-                Console.WriteLine("Do you want to choose " + characters[charIndex-1].name + "? Press Enter!");
-                Console.WriteLine("If you want to see another characters information Press their number!");
+                
 
                 charSelection = Console.ReadLine();
                 if (charSelection == "")
@@ -191,6 +195,7 @@ namespace RockPaperScissorsLizardSpockUltimate
             {
                 int charIndex = charGen.Next(0, characters.Count);
                 opponentCharacters.Add(characters[charIndex]);
+                characters.Remove(characters[charIndex]);
             }            
 
             return opponentCharacters;
@@ -221,6 +226,13 @@ namespace RockPaperScissorsLizardSpockUltimate
         }
 
 
+        //Timer - nOt used for now
+        static void Timer_Elapsed(Object sender, ElapsedEventArgs e)
+        {
+            Console.WriteLine("3...");
+        }
+
+
 
         // The Battle
         static bool Fight(List<Character> yourCharacters, List<Character> opponentCharacters)
@@ -230,14 +242,17 @@ namespace RockPaperScissorsLizardSpockUltimate
             double damageDealt = 10;
 
             int attackIndex = 0;
+            int oppAttackIndex = 0;
             Attack yourAttack = new Attack();
             Attack opponentAttack = new Attack();
 
             bool didChoose;
 
-            int wOL;
+            int yourAgainst;
+            int oppAgainst;
 
             bool canDoBehavior = true;
+            bool opponentCanDoBehavior = true;
 
             Character yourChar = yourCharacters[0];
             yourCharacters.Remove(yourChar);
@@ -256,8 +271,22 @@ namespace RockPaperScissorsLizardSpockUltimate
 
 
                 //Choose Your Attack
-
+                               
                 Console.WriteLine("Choose your attack!");
+                Console.WriteLine("1. Rock");
+                Console.WriteLine("2. Paper");
+                Console.WriteLine("3. Scissors");
+                Console.WriteLine("4. Lizard");
+                Console.WriteLine("5. Spock");
+
+                /* TIMER
+                 
+                Timer timer1 = new Timer(1000);
+                timer1.Elapsed += Timer_Elapsed;
+                timer1.Start();
+                */ 
+
+
 
                 string attackSelection = Console.ReadLine();
                 bool attackSuccess = int.TryParse(attackSelection, out attackIndex);
@@ -267,10 +296,12 @@ namespace RockPaperScissorsLizardSpockUltimate
                     Console.WriteLine("You failed to choose an attack!");
 
                     didChoose = false;
+                    //timer1.Stop();
                 }
                 else
                 {
                     didChoose = true;
+                    //timer1.Stop();
                 }
 
                 yourAttack = YourAttack(attackIndex, yourAttack, didChoose);
@@ -284,14 +315,14 @@ namespace RockPaperScissorsLizardSpockUltimate
                 {
                     //Make smart
                     Random opponentAttackGen = new Random();
-                    attackIndex = opponentAttackGen.Next(1, 6);
-                    opponentAttack = OpponentAttack(attackIndex);
+                    oppAttackIndex = opponentAttackGen.Next(1, 6);
+                    opponentAttack = OpponentAttack(oppAttackIndex);
 
 
 
 
                     // Attack UI
-
+                    Console.WriteLine("");
                     Console.WriteLine("You chose " + yourAttack.name);
                     Console.WriteLine("Your opponent chose " + opponentAttack.name);
 
@@ -312,18 +343,17 @@ namespace RockPaperScissorsLizardSpockUltimate
                     yourChar.BehaviorSpecial(canDoBehavior);
                     yourAttack.Transform();
                     yourAttack.Transformations(yourChar.Specials);
-                    
+
 
 
                     //Choose transformation
+                    opponentAttack.Transform();
+
                     string transform = Console.ReadLine();
                     int transformIndex;
                     bool transformSuccess = int.TryParse(transform, out transformIndex);
-                    if (transformSuccess == false || transformIndex < 1 || transformIndex > 3)
-                    {
-                        Console.WriteLine("You chose not to transform!");
-                    }
-                    else if (canDoBehavior == true)
+                    
+                    if (canDoBehavior == true)
                     {
                         if (transformIndex == 1)
                         {
@@ -347,20 +377,36 @@ namespace RockPaperScissorsLizardSpockUltimate
                             yourChar.Specials = 1;
                         }
                     }
-                    
+                    else
+                    {
+                        Console.WriteLine("You chose not to transform!");
+                    }
+
 
 
 
 
                     // Enemy transformation
-                    //Somethings wrong!!!!!
-                    //Also make it thrice only!!!!
 
                     Random transformGen = new Random();
                     int transformInt = transformGen.Next(100);
                     if (transformInt < 25)
                     {
-                        transformInt = transformGen.Next(0, 3);
+                        if (yourChar.Specials > 0 && opponentCanDoBehavior == true)
+                        {
+                            transformInt = transformGen.Next(0, 3);
+                        }
+                        else if (yourChar.Specials == 0)
+                        {
+                            transformInt = 0;
+                        }
+                        else if (opponentCanDoBehavior == false)
+                        {
+                            transformInt = transformGen.Next(1, 3);
+                        }
+                        
+
+
                         if (transformInt == 0)
                         {
                             Console.WriteLine("Your enemy chose to transform their " + opponentAttack.name + " into a " + opponentChar.behaviorAttack.name);
@@ -368,12 +414,12 @@ namespace RockPaperScissorsLizardSpockUltimate
                         }
                         else if (transformInt == 1)
                         {
-                            Console.WriteLine("Your opponent chose to transform your " + opponentAttack.name + " into a " + opponentAttack.firstTransform.name);
+                            Console.WriteLine("Your opponent chose to transform their " + opponentAttack.name + " into a " + opponentAttack.firstTransform.name);
                             opponentAttack = opponentAttack.firstTransform;
                         }
                         else
                         {
-                            Console.WriteLine("Your opponent chose to transform your " + opponentAttack.name + " into a " + opponentAttack.secondTransform.name);
+                            Console.WriteLine("Your opponent chose to transform their " + opponentAttack.name + " into a " + opponentAttack.secondTransform.name);
                             opponentAttack = opponentAttack.secondTransform;
                         }
                     }
@@ -381,7 +427,6 @@ namespace RockPaperScissorsLizardSpockUltimate
                     {
                         Console.WriteLine("Your opponent chose not to transform!");
                     }
-                    
                     
 
                 }
@@ -391,26 +436,27 @@ namespace RockPaperScissorsLizardSpockUltimate
                 
 
                 // Which attack wins
-                wOL = WinOrLoose(attackIndex, yourAttack);
+                yourAgainst = WinOrLoose(oppAttackIndex, yourAttack);
+                oppAgainst = WinOrLoose(attackIndex, opponentAttack);
 
 
                 // Deal the Damage
-                if (wOL == 1)
+                if (yourAgainst > oppAgainst)
                 {
                     Console.WriteLine("You Win!");
 
                     DealDamage(damageDealt, yourAttack, opponentAttack, yourChar, opponentChar);
                 }
-                else if (wOL == 0)
-                {
-                    Console.WriteLine("It's a Draw!");
-                }
-                else
+                else if (yourAgainst < oppAgainst)
                 {
                     Console.WriteLine("You Loose!");
 
                     TakeDamage(damageDealt, yourAttack, opponentAttack, yourChar, opponentChar);
-
+                    
+                }
+                else
+                {
+                    Console.WriteLine("It's a Draw!");
                 }
                 
                 Console.ReadLine();
@@ -547,9 +593,9 @@ namespace RockPaperScissorsLizardSpockUltimate
 
         static int WinOrLoose(int attackIndex, Attack yourAttack)
         {
-            int wOL = yourAttack.Against(attackIndex);
+            int yourAgainst = yourAttack.Against(attackIndex);
 
-            return wOL;
+            return yourAgainst;
         }
 
 

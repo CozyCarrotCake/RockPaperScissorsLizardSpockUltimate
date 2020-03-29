@@ -12,7 +12,7 @@ namespace RockPaperScissorsLizardSpockUltimate
         public string name;
 
         //Stats
-        public double hp = 100.0;
+        protected double hp = 100.0;
 
         protected double damage;
         protected double defense;
@@ -27,8 +27,9 @@ namespace RockPaperScissorsLizardSpockUltimate
                
         protected int streak = 0;
 
-        protected int specials = 2;
+        public int specials { get; protected set; } = 2;
 
+        protected int against;
 
         //METHODS
 
@@ -89,6 +90,19 @@ namespace RockPaperScissorsLizardSpockUltimate
             }
         }
 
+        
+        //HOld the against information
+        public int Against
+        {
+            get
+            {
+                return against;
+            }
+            set
+            {
+                against = value;
+            }
+        }
 
 
         //Combo Streak
@@ -112,6 +126,19 @@ namespace RockPaperScissorsLizardSpockUltimate
             }
         }
 
+
+        //Set n get hp
+        public double HP
+        {
+            get
+            {
+                return hp;
+            }
+            set
+            {
+                hp = value;
+            }
+        }
 
 
         //Special

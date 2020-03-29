@@ -45,10 +45,13 @@
   <ItemGroup>
     <Compile Include="Assassin.cs" />
     <Compile Include="Attack.cs" />
+    <Compile Include="Battle.cs" />
     <Compile Include="Block.cs" />
     <Compile Include="Blocker.cs" />
     <Compile Include="Bruiser.cs" />
     <Compile Include="Character.cs" />
+    <Compile Include="CharacterPicker.cs" />
+    <Compile Include="CharacterRandomizer.cs" />
     <Compile Include="Defensive.cs" />
     <Compile Include="Evader.cs" />
     <Compile Include="Lizard.cs" />
@@ -62,6 +65,7 @@
     <Compile Include="Snap.cs" />
     <Compile Include="Special.cs" />
     <Compile Include="Spock.cs" />
+    <Compile Include="Teams.cs" />
     <Compile Include="TheBoxer.cs" />
     <Compile Include="TheBreaker.cs" />
     <Compile Include="TheCat.cs" />

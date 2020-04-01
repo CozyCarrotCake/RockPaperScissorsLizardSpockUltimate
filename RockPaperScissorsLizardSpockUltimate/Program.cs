@@ -12,13 +12,12 @@ namespace RockPaperScissorsLizardSpockUltimate
         static void Main(string[] args)
         {
             //Chosen Characters
-            Character yourChar = new Character();
             List<Character> yourCharacters = new List<Character>();
-            Character opponentChar = new Character();
             List<Character> opponentCharacters = new List<Character>();
 
-            //List of the avaible Characters
             List<Character> characters = new List<Character>();
+
+            //List of the avaible Characters
             characters.Add(new TheBoxer());
             characters.Add(new TheSledgehammer());
             characters.Add(new TheSniper());
@@ -28,15 +27,15 @@ namespace RockPaperScissorsLizardSpockUltimate
             characters.Add(new TheQuick());
             //characters.Add(new TheSledgehammer());
 
-
-            
             bool didWin;
 
 
-            //The Methods
+            
 
             Intro();
 
+            
+           
 
             CharacterPicker characterPicker = new CharacterPicker();
             yourCharacters = characterPicker.Choose(yourCharacters, characters);

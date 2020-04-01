@@ -6,13 +6,16 @@ using System.Threading.Tasks;
 
 namespace RockPaperScissorsLizardSpockUltimate
 {
-    class CharacterPicker
+    class CharacterPicker : Teams
     {
 
         //Choosing CHaracters
 
+        
+
         public List<Character> Choose(List<Character> yourCharacters, List<Character> characters)
         {
+            //Intro
             Console.Clear();
             Console.WriteLine("You will now choose your 3 fighters!");
             Console.WriteLine("Choose your FIRST fighter! Press the number of the character for its information!");
@@ -33,15 +36,16 @@ namespace RockPaperScissorsLizardSpockUltimate
 
             }
 
-
+            //The first input
             string charSelection = Console.ReadLine();
             int charIndex;
 
-            string[] yourCharactersNames = new string[3]; //Dont wanna deList
+            string[] yourCharactersNames = new string[3]; //Have to have an array to write all as the indexes doesn't exist in the lists yet.
 
 
-            while (1 == 1)
+            while (1 == 1) // Körs tills man valt alla 3
             {
+                //Input checkaren körs alltid först, den första inputen togs ovanför och resten tas sist
                 bool charSuccess = int.TryParse(charSelection, out charIndex);
                 while (charSuccess == false || charIndex < 1 || charIndex > 8)
                 {
@@ -52,6 +56,8 @@ namespace RockPaperScissorsLizardSpockUltimate
                 }
 
                 Console.Clear();
+
+                //Det som står överst i fönstret
                 Console.WriteLine("Do you want to choose " + characters[charIndex - 1].name + "? Press Enter!");
                 Console.WriteLine("If you want to see another characters information Press their number!");
                 Console.WriteLine("");
@@ -76,6 +82,8 @@ namespace RockPaperScissorsLizardSpockUltimate
 
 
                 charSelection = Console.ReadLine();
+
+                //If you chose the character you picked before
                 if (charSelection == "")
                 {
                     Console.Clear();
@@ -102,7 +110,7 @@ namespace RockPaperScissorsLizardSpockUltimate
                     else
                     {
                         yourCharactersNames[2] = yourChar.name;
-                        break;
+                        break; // Only breaks the while when all characters have been chosen
                     }
 
                     Console.WriteLine("");

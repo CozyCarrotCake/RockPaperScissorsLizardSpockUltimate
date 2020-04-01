@@ -9,7 +9,6 @@ namespace RockPaperScissorsLizardSpockUltimate
     class Teams
     {
 
-
         //Just writes the teams
         public void MatchUp(List<Character> yourCharacters, List<Character> opponentCharacters)
         {
@@ -27,6 +26,7 @@ namespace RockPaperScissorsLizardSpockUltimate
                 Console.WriteLine(opponentCharacters[i].name);
             }
 
+            
             Console.WriteLine("");
             Console.WriteLine("Time to fight!");
             Console.ReadLine();

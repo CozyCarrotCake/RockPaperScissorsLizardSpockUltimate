@@ -175,9 +175,8 @@ namespace RockPaperScissorsLizardSpockUltimate
 
 
         //Passives
-        public virtual void Passive()
+        public virtual void Passive(Character opponentChar)
         {
-
         }
 
 

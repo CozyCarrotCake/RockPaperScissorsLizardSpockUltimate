@@ -113,7 +113,16 @@ namespace RockPaperScissorsLizardSpockUltimate
                 WinOrLoose(opponentChar, opponentAttack, attackIndex);
 
 
-                // Who wins
+
+                //Keep on fixing passive!!!!!!!!!!!!!!!!!!!!!!!
+                yourChar.Passive(opponentChar);
+
+
+                Console.ReadLine();
+
+
+
+                // Who wins and does the damage
                 WhoWins();
 
 

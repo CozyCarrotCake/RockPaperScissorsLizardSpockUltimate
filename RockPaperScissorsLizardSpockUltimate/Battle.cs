@@ -18,7 +18,7 @@ namespace RockPaperScissorsLizardSpockUltimate
         //The attacks, gets new subclasses each round based on what is picked and maybe transformed
         Attack yourAttack = new Attack();
         Attack opponentAttack = new Attack();
-
+        int yourLastAttackIndex = 1;
 
 
 
@@ -39,6 +39,9 @@ namespace RockPaperScissorsLizardSpockUltimate
         double damageDealt = 10;
 
 
+        Queue<int> attackQueue = new Queue<int>();
+        List<int> attacks = new List<int>();
+       
 
 
 
@@ -84,7 +87,7 @@ namespace RockPaperScissorsLizardSpockUltimate
 
                     //Opponents Attack
                     //Make smart
-                    opponentAttack = RandomAttack();
+                    opponentAttack = OpponentAttack();
 
 
                     Console.Clear();
@@ -103,6 +106,8 @@ namespace RockPaperScissorsLizardSpockUltimate
 
                     // Enemy transformation
                     opponentAttack = EnemyTransformation();
+
+                    yourLastAttackIndex = attackIndex;
                     
                 }
 
@@ -208,20 +213,56 @@ namespace RockPaperScissorsLizardSpockUltimate
 
 
         //Randomized Attack
-        public Attack RandomAttack()
-        {
-            Random opponentAttackGen = new Random();
-            oppAttackIndex = opponentAttackGen.Next(1, 6);
-            opponentAttack = OpponentAttack();
-            return opponentAttack;
-        }
-
         public Attack OpponentAttack()
         {
-            Attack opponentAttack = WhichAttack(oppAttackIndex);
+            Random opponentAttackGen = new Random();
+
+            int oppAttackSmart = opponentAttackGen.Next(0, 100);
+            if (oppAttackSmart < 80)
+            {
+                if (attackQueue.Count == 0)
+                {
+
+                    attacks.Add(1);
+                    attacks.Add(2);
+                    attacks.Add(3);
+                    attacks.Add(4);
+                    attacks.Add(5);
+
+                    for (int i = 6; i > 1; i--)
+                    {
+                        oppAttackIndex = opponentAttackGen.Next(1, i);
+
+                        attackQueue.Enqueue(attacks[oppAttackIndex - 1]);
+                        attacks.Remove(attacks[oppAttackIndex - 1]);
+                    }
+
+                    //for the round
+                    oppAttackIndex = attackQueue.Dequeue();
+                    opponentAttack = WhichAttack(oppAttackIndex);
+                }
+                else
+                {
+                    oppAttackIndex = attackQueue.Dequeue();
+                    opponentAttack = WhichAttack(oppAttackIndex);
+
+                }
+            }
+            else
+            {
+                Console.WriteLine("hey");
+                Console.ReadLine();
+                oppAttackIndex = yourLastAttackIndex;
+                opponentAttack = WhichAttack(oppAttackIndex);
+            }
+
+
+            
+            
 
             return opponentAttack;
         }
+        
 
 
         //Which Attack was chosen 
@@ -383,8 +424,6 @@ namespace RockPaperScissorsLizardSpockUltimate
 
         public void WhoWins()
         {
-            Console.WriteLine(yourChar.Against);
-            Console.WriteLine(opponentChar.Against);
             
             if (yourChar.Against > opponentChar.Against)
             {
@@ -507,8 +546,9 @@ namespace RockPaperScissorsLizardSpockUltimate
                     chara = characters[0];
                     characters.Remove(chara);
                     Console.WriteLine(chara.name + " jumps in!");
-                    chara.HP = 100;
-
+                    Console.WriteLine(chara.HP);
+                    chara.HP = 100; // WHAAAAAAt
+                    Console.WriteLine(chara.HP);
                 }
                 else
                 {

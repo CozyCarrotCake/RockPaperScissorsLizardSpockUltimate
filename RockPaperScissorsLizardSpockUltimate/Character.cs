@@ -90,6 +90,17 @@ namespace RockPaperScissorsLizardSpockUltimate
             }
         }
 
+        public double RegainHealth
+        {
+            get
+            {
+                return hp;
+            }
+            set
+            {
+                hp = value;
+            }
+        }
         
         //HOld the against information
         public int Against

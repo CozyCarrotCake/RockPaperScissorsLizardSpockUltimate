@@ -41,13 +41,17 @@ namespace RockPaperScissorsLizardSpockUltimate
 
         Queue<int> attackQueue = new Queue<int>();
         List<int> attacks = new List<int>();
-       
+
 
 
 
         //GENERAL BOOLS
+        bool youWonRound;
+        bool opponentWonRound;
+        
 
-        //If you won the round
+
+        //If you won the game
         bool didWin;
 
         //if the entire fight is done or not
@@ -66,14 +70,17 @@ namespace RockPaperScissorsLizardSpockUltimate
             opponentChar = opponentCharacters[0];
             opponentCharacters.Remove(opponentChar);
             Console.WriteLine("First off, " + yourChar.name + " vs. " + opponentChar.name);
+            Console.ReadLine();
+            Console.Clear();
+
 
 
             while (done == false)
             {
 
                 //Remaining HP
-                Console.WriteLine("Your remaining HP: " + yourChar.HP);
-                Console.WriteLine("Your opponents remaining HP: " + opponentChar.HP);
+                Console.WriteLine(yourChar.name + "'s remaining HP: " + yourChar.HP);
+                Console.WriteLine(opponentChar.name + "'s remaining HP: " + opponentChar.HP);
 
 
 
@@ -93,11 +100,21 @@ namespace RockPaperScissorsLizardSpockUltimate
                     Console.Clear();
 
                     // Attack UI
-                    Console.WriteLine("");
                     Console.WriteLine("You chose " + yourAttack.name);
                     Console.WriteLine("Your opponent chose " + opponentAttack.name);
 
                     
+
+                    if (yourChar.whenPassive == 0)
+                    {
+                        yourChar.Passive(opponentChar, yourAttack, opponentAttack, youWonRound);
+                    }
+                    else if (opponentChar.whenPassive == 0)
+                    {
+                        opponentChar.Passive(yourChar, opponentAttack, yourAttack, opponentWonRound);
+                    }
+
+
 
                     //TRANSFORMATION
                     yourAttack = YourTransformation();
@@ -117,14 +134,7 @@ namespace RockPaperScissorsLizardSpockUltimate
                 WinOrLoose(yourChar, yourAttack, oppAttackIndex);
                 WinOrLoose(opponentChar, opponentAttack, attackIndex);
 
-
-
-                //Keep on fixing passive!!!!!!!!!!!!!!!!!!!!!!!
-                yourChar.Passive(opponentChar);
-
-
-                Console.ReadLine();
-
+                
 
 
                 // Who wins and does the damage
@@ -133,14 +143,30 @@ namespace RockPaperScissorsLizardSpockUltimate
 
 
 
+                //Every characters specific passives
+                if (yourChar.whenPassive == 3)
+                {
+                    yourChar.Passive(opponentChar, yourAttack, opponentAttack, youWonRound);
+                }
+                else if (opponentChar.whenPassive == 3)
+                {
+                    opponentChar.Passive(yourChar, opponentAttack, yourAttack, opponentWonRound);
+                }
+
+
+
+
+
+
+
+
+
 
                 //If your fighter dies
-                int deathQue = 0;
-                DidDie(yourCharacters, yourChar, deathQue);
+                CheckDeath(yourCharacters);
 
                 //If opponent fighter dies
-                deathQue = 1;
-                DidDie(opponentCharacters, opponentChar, deathQue);
+                OpponentCheckDeath(opponentCharacters);
 
                 
 
@@ -250,7 +276,8 @@ namespace RockPaperScissorsLizardSpockUltimate
             }
             else
             {
-                Console.WriteLine("hey");
+                //choosing the attack that you used last round
+
                 Console.ReadLine();
                 oppAttackIndex = yourLastAttackIndex;
                 opponentAttack = WhichAttack(oppAttackIndex);
@@ -296,7 +323,8 @@ namespace RockPaperScissorsLizardSpockUltimate
         }
 
 
-       
+        
+
 
 
 
@@ -425,9 +453,14 @@ namespace RockPaperScissorsLizardSpockUltimate
         public void WhoWins()
         {
             
+
+            
             if (yourChar.Against > opponentChar.Against)
             {
                 Console.WriteLine("You Win!");
+
+                youWonRound = true;
+                opponentWonRound = false;
 
                 DealDamage();
             }
@@ -435,12 +468,18 @@ namespace RockPaperScissorsLizardSpockUltimate
             {
                 Console.WriteLine("You Loose!");
 
+                youWonRound = false;
+                opponentWonRound = true;
+
                 TakeDamage();
 
             }
             else
             {
                 Console.WriteLine("It's a Draw!");
+
+                youWonRound = false;
+                opponentWonRound = false;
             }
 
             Console.ReadLine();
@@ -461,7 +500,7 @@ namespace RockPaperScissorsLizardSpockUltimate
             opponentChar.Streak = 0;
             yourChar.Streak = 1;
             double comboValue = Math.Pow((yourAttack.combo * yourChar.combo), yourChar.Streak);
-            Console.WriteLine(comboValue);
+            Console.WriteLine(yourChar.name + "'s Combo Bonus: " + comboValue);
             damageDealt *= comboValue;
 
 
@@ -471,13 +510,28 @@ namespace RockPaperScissorsLizardSpockUltimate
 
             if (hit <= (yourAttack.criticalHit + yourChar.criticalHit) / 2)
             {
-                Console.WriteLine("It's a crit!");
-                damageDealt *= 2;
+                //Sledges passive
+                if (yourChar.whenPassive == 1)
+                {
+                    yourChar.Passive(opponentChar, yourAttack, opponentAttack, youWonRound);
+                }
+
+                //for basically every character
+                else
+                {
+                    Console.WriteLine("It's a crit!");
+                    damageDealt *= 2;
+                }
             }
 
 
 
 
+
+
+
+
+            //defense
             damageDealt = damageDealt - opponentAttack.TakeDamage() + opponentChar.TakeDamage();
 
             if (damageDealt < 5)
@@ -485,9 +539,25 @@ namespace RockPaperScissorsLizardSpockUltimate
                 damageDealt = 5;
             }
 
-            opponentChar.LostHealth = damageDealt;
 
 
+            //Passives
+            Random invisGen = new Random();
+            int invisPas = invisGen.Next(100);
+
+            if (opponentChar.whenPassive == 2 && invisPas < 15)
+            {
+                opponentChar.Passive(yourChar, opponentAttack, yourAttack, opponentWonRound);
+
+            }
+            else
+            {
+                opponentChar.LostHealth = damageDealt;
+            }
+
+            
+
+            
         }
 
         public void TakeDamage()
@@ -499,21 +569,38 @@ namespace RockPaperScissorsLizardSpockUltimate
             yourChar.Streak = 0;
             opponentChar.Streak = 1;
             double comboValue = Math.Pow((opponentAttack.combo * opponentChar.combo), opponentChar.Streak);
-            Console.WriteLine(comboValue);
+            Console.WriteLine(opponentChar.name + "'s Combo Bonus: " + comboValue);
             damageDealt *= comboValue;
 
+            
 
-            //crit
+                //crit
             Random critGen = new Random();
             int hit = critGen.Next(100);
 
             if (hit <= (opponentAttack.criticalHit + opponentChar.criticalHit) / 2)
             {
-                Console.WriteLine("It's a crit!");
-                damageDealt *= 2;
+
+                //Sledges passive
+                if (opponentChar.whenPassive == 1)
+                {
+                    opponentChar.Passive(yourChar, opponentAttack, yourAttack, opponentWonRound);
+                }
+
+                //for basically every character
+                else
+                {
+                    Console.WriteLine("It's a crit!");
+                    damageDealt *= 2;
+                }
+                    
+                
             }
 
 
+            
+
+            
 
 
             //taken
@@ -525,49 +612,81 @@ namespace RockPaperScissorsLizardSpockUltimate
             }
 
 
-            yourChar.LostHealth = damageDealt;
+
+            //Passives
+            Random invisGen = new Random();
+            int invisPas = invisGen.Next(100);
+
+            if (yourChar.whenPassive == 2 && invisPas < 15)
+            {
+                yourChar.Passive(opponentChar, yourAttack, opponentAttack, youWonRound);
+
+            }
+            else
+            {
+                yourChar.LostHealth = damageDealt;
+            }
+
+            
         }
 
 
 
 
 
-        //Checks if the fighters die, takes parameters because it runs on both the player and opponent
-        public void DidDie(List<Character> characters, Character chara, int deathQue)
+        //Checks if the fighters die
+        public void CheckDeath(List<Character> yourCharacters)
         {
-            if (chara.HP < 0)
+            if (yourChar.HP < 0)
             {
                 Console.Clear();
-                Console.WriteLine(chara.name + " can no longer fight!");
+                Console.WriteLine(yourChar.name + " can no longer fight!");
 
-                if (characters.Count != 0)
+                if (yourCharacters.Count != 0)
                 {
-                                        
-                    chara = characters[0];
-                    characters.Remove(chara);
-                    Console.WriteLine(chara.name + " jumps in!");
-                    Console.WriteLine(chara.HP);
-                    chara.HP = 100; // WHAAAAAAt
-                    Console.WriteLine(chara.HP);
+                    yourChar = yourCharacters[0];
+                    yourCharacters.Remove(yourChar);
+                    Console.WriteLine(yourChar.name + " jumps in!");
+                    yourChar.HP = 100;
                 }
-                else
+                else                
                 {
-                    if (deathQue == 0)
-                    {
-                        Console.WriteLine("All your fighters are unable to continue!");
-                        didWin = false;
-                    }
-                    if (deathQue == 1)
-                    {
-                        Console.WriteLine("All your opponent's fighters are unable to continue!");
-                        didWin = true;
-                    }
+                    Console.WriteLine("All your fighters are unable to continue!");
+                    didWin = false;
 
                     done = true;
                 }
 
                 Console.ReadLine();
             }
+        }
+
+        public void OpponentCheckDeath(List<Character> opponentCharacters)
+        {
+            if (opponentChar.HP < 0)
+            {
+                Console.Clear();
+                Console.WriteLine(opponentChar.name + " can no longer fight!");
+
+                if (opponentCharacters.Count != 0)
+                {
+                    opponentChar = opponentCharacters[0];
+                    opponentCharacters.Remove(opponentChar);
+                    Console.WriteLine(opponentChar.name + " jumps in!");                    
+                    opponentChar.HP = 100;
+                }
+                else
+                {
+                    Console.WriteLine("All your opponent's fighters are unable to continue!");
+                    didWin = true;
+
+                    done = true;
+                }
+
+                Console.ReadLine();
+            }
+
+            
         }
 
 

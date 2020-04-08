@@ -6,32 +6,36 @@ using System.Threading.Tasks;
 
 namespace RockPaperScissorsLizardSpockUltimate
 {
-    class TheSledgehammer : Bruiser
+    class TheInvisible : Evader
     {
-        public TheSledgehammer()
+        public TheInvisible()
         {
-            name = "The Sledgehammer";
+            name = "The Invisible";
 
-            damage *= 1.2;
 
-            whenPassive = 1;
+            criticalHit += 15;
+
+            whenPassive = 2;
         }
+
 
         public override void Info(int Index)
         {
             base.Info(Index);
 
-            Console.WriteLine("Damage + 20%" );
-            Console.WriteLine("Passive: Thick Skin - Can't be critical hit");
+            Console.WriteLine("Crit + 0.15");
+            Console.WriteLine("Passive: Uh, Invisible? - Has a small chance of avoiding taken damage from a losing hand.");
 
         }
 
         public override void Passive(Character otherChar, Attack yourAttack, Attack otherAttack, bool wonRound)
         {
+            
+            Console.WriteLine(otherChar.name + " missed the attack on the Invisible!");
 
-            Console.WriteLine("It's a crit, but the crit doesn't affect the Sledgehammer!");
 
 
         }
+
     }
 }

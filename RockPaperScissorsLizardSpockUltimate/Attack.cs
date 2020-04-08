@@ -45,7 +45,6 @@ namespace RockPaperScissorsLizardSpockUltimate
         // Check Wins
         public int Against(int attackIndex)
         {
-            Console.WriteLine(attackIndex);
 
             if (attackIndex == 1)
             {

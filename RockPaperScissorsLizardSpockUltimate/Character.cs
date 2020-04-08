@@ -22,6 +22,9 @@ namespace RockPaperScissorsLizardSpockUltimate
         public Attack behaviorAttack { get; protected set; }
 
 
+        public int whenPassive { get; protected set; }
+
+
         // Thingys
         protected double theDamage;
                
@@ -90,7 +93,9 @@ namespace RockPaperScissorsLizardSpockUltimate
             }
         }
 
-        public double RegainHealth
+        
+        //Heal HP
+        public double HP
         {
             get
             {
@@ -101,7 +106,9 @@ namespace RockPaperScissorsLizardSpockUltimate
                 hp = value;
             }
         }
-        
+
+
+
         //HOld the against information
         public int Against
         {
@@ -115,6 +122,7 @@ namespace RockPaperScissorsLizardSpockUltimate
             }
         }
 
+               
 
         //Combo Streak
         public int Streak
@@ -138,18 +146,7 @@ namespace RockPaperScissorsLizardSpockUltimate
         }
 
 
-        //Set n get hp
-        public double HP
-        {
-            get
-            {
-                return hp;
-            }
-            set
-            {
-                hp = value;
-            }
-        }
+ 
 
 
         //Special
@@ -186,8 +183,17 @@ namespace RockPaperScissorsLizardSpockUltimate
 
 
         //Passives
-        public virtual void Passive(Character opponentChar)
+        public virtual void Passive(Character otherChar, Attack yourAttack, Attack otherAttack, bool wonRound)
         {
+            //0: Quick
+
+            //1: Sledge
+
+            //2: Invis
+
+            //3: Cat, Boxer, Breaker, Shield, Sniper
+
+
         }
 
 

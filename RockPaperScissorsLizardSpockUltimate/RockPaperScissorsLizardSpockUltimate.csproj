@@ -69,6 +69,7 @@
     <Compile Include="TheBoxer.cs" />
     <Compile Include="TheBreaker.cs" />
     <Compile Include="TheCat.cs" />
+    <Compile Include="TheInvisible.cs" />
     <Compile Include="TheQuick.cs" />
     <Compile Include="TheShield.cs" />
     <Compile Include="TheSledgehammer.cs" />

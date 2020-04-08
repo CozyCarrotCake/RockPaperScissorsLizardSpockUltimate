@@ -22,6 +22,8 @@ namespace RockPaperScissorsLizardSpockUltimate
             defense = 100;
             combo = 0;
             criticalHit = 0;
+
+            //Breaks all passives?
         }
     }
 }

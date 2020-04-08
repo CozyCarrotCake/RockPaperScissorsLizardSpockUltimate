@@ -13,6 +13,8 @@ namespace RockPaperScissorsLizardSpockUltimate
             name = "The Breaker";
 
             combo += 0.15;
+
+            whenPassive = 3;
         }
 
         public override void Info(int Index)
@@ -20,6 +22,18 @@ namespace RockPaperScissorsLizardSpockUltimate
             base.Info(Index);
 
             Console.WriteLine("Combo + 0.15");
+            Console.WriteLine("Passive: Combobreaker - Breaks enemy combo if it gets a streak of 3");
+
+        }
+
+        public override void Passive(Character otherChar, Attack yourAttack, Attack otherAttack, bool wonRound)
+        {
+            if (otherChar.Streak == 3)
+            {
+                Console.WriteLine("The Breaker broke " + otherChar.name + "'s combo!");
+                otherChar.Streak = 0;
+            }
+
 
         }
 

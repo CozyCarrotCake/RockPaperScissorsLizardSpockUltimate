@@ -10,8 +10,13 @@ namespace RockPaperScissorsLizardSpockUltimate
     {
 
         //Choosing CHaracters
+        public int charIndex = 0;
+        string charSelection = "";
 
-        
+        //Have to have an array to write all as the indexes doesn't exist in the lists yet.
+        string[] yourCharactersNames = new string[3];
+
+
 
         public List<Character> Choose(List<Character> yourCharacters, List<Character> characters)
         {
@@ -19,33 +24,21 @@ namespace RockPaperScissorsLizardSpockUltimate
             Console.Clear();
             Console.WriteLine("You will now choose your 3 fighters!");
             Console.WriteLine("Choose your FIRST fighter! Press the number of the character for its information!");
-            Console.WriteLine("");
-            Console.WriteLine("Your fighters:");
-            Console.WriteLine("1. ");
-            Console.WriteLine("2. ");
-            Console.WriteLine("3. ");
-            Console.WriteLine("");
+
+            YourFighters();
 
 
-            for (int i = 0; i < 7; i++)
+            WriteTheCharacters(characters);
+
+
+
+            charSelection = Console.ReadLine();
+
+
+            // Loop som körs tills man valt alla 3, break
+            while (1 == 1) 
             {
-
-                Console.WriteLine();
-                Console.WriteLine(i + 1 + ". " + characters[i].name);
-
-
-            }
-
-            //The first input
-            string charSelection = Console.ReadLine();
-            int charIndex;
-
-            string[] yourCharactersNames = new string[3]; //Have to have an array to write all as the indexes doesn't exist in the lists yet.
-
-
-            while (1 == 1) // Körs tills man valt alla 3
-            {
-                //Input checkaren körs alltid först, den första inputen togs ovanför och resten tas sist
+                
                 bool charSuccess = int.TryParse(charSelection, out charIndex);
                 while (charSuccess == false || charIndex < 1 || charIndex > 8)
                 {
@@ -60,30 +53,21 @@ namespace RockPaperScissorsLizardSpockUltimate
                 //Det som står överst i fönstret
                 Console.WriteLine("Do you want to choose " + characters[charIndex - 1].name + "? Press Enter!");
                 Console.WriteLine("If you want to see another characters information Press their number!");
-                Console.WriteLine("");
-                Console.WriteLine("Your fighters:");
-                Console.WriteLine("1. " + yourCharactersNames[0]);
-                Console.WriteLine("2. " + yourCharactersNames[1]);
-                Console.WriteLine("3. " + yourCharactersNames[2]);
-                Console.WriteLine("");
-
-                for (int i = 0; i < characters.Count; i++)
-                {
-
-                    Console.WriteLine();
-                    Console.WriteLine(i + 1 + ". " + characters[i].name);
-                    if (i == charIndex - 1)
-                    {
-                        characters[i].Info(i);
-                    }
-
-                }
-                Console.WriteLine("");
 
 
+                YourFighters();
+
+                WriteTheCharacters(characters);
+                                
+
+
+                //Kollar om man väljer en ny karaktär eller om man bestämde sig för den man hade
                 charSelection = Console.ReadLine();
 
-                //If you chose the character you picked before
+
+
+
+                //Om man tryckte enter så bestämde man sig, annars körs loopen om
                 if (charSelection == "")
                 {
                     Console.Clear();
@@ -113,27 +97,12 @@ namespace RockPaperScissorsLizardSpockUltimate
                         break; // Only breaks the while when all characters have been chosen
                     }
 
-                    Console.WriteLine("");
-                    Console.WriteLine("Your fighters:");
-                    Console.WriteLine("1. " + yourCharactersNames[0]);
-                    Console.WriteLine("2. " + yourCharactersNames[1]);
-                    Console.WriteLine("3. " + yourCharactersNames[2]);
-                    Console.WriteLine("");
 
-                    for (int i = 0; i < characters.Count; i++)
-                    {
+                    YourFighters();
 
-                        Console.WriteLine();
-                        Console.WriteLine(i + 1 + ". " + characters[i].name);
-                        if (i == charIndex - 1)
-                        {
-                            characters[i].Info(i);
-                        }
-
-                    }
+                    WriteTheCharacters(characters);
 
                     charSelection = Console.ReadLine();
-
                 }
 
 
@@ -144,6 +113,30 @@ namespace RockPaperScissorsLizardSpockUltimate
             return yourCharacters;
         }
 
+        //Skriver ut alla karaktärer
+        public void WriteTheCharacters(List <Character> characters)
+        {
+            for (int i = 0; i < characters.Count; i++)
+            {
 
+                Console.WriteLine();
+                Console.WriteLine(i + 1 + ". " + characters[i].name);
+                if (i == charIndex - 1)
+                {
+                    characters[i].Info(i);
+                }
+            }
+            Console.WriteLine("");
+        }
+
+        //Skriver ut de karaktärer man valt
+        public void YourFighters()
+        {
+            Console.WriteLine("");
+            Console.WriteLine("Your fighters:");
+            Console.WriteLine("1. " + yourCharactersNames[0]);
+            Console.WriteLine("2. " + yourCharactersNames[1]);
+            Console.WriteLine("3. " + yourCharactersNames[2]);
+        }
     }
 }

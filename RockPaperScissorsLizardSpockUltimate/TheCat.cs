@@ -8,7 +8,7 @@ namespace RockPaperScissorsLizardSpockUltimate
 {
     class TheCat : Assassin
     {
-        public int bleed { get; protected set; }
+        public int bleed { get; protected set; } = 3;
 
         public TheCat()
         {
@@ -16,6 +16,8 @@ namespace RockPaperScissorsLizardSpockUltimate
 
 
             combo += 0.15;
+
+            whenPassive = 3;
         }
 
 
@@ -24,24 +26,29 @@ namespace RockPaperScissorsLizardSpockUltimate
             base.Info(Index);
 
             Console.WriteLine("Combo + 0.15");
-            Console.WriteLine("Passive: Bleed - Your enemies gets hurt by a bleed for 3 rounds everytime you win a round.");
+            Console.WriteLine("Passive: Bleed - Your enemies start to bleed after you win a round which hurts them for 3 rounds.");
                        
         }
 
-        public override void Passive(Character opponentChar)
+        public override void Passive(Character otherChar, Attack yourAttack, Attack otherAttack, bool wonRound)
         {
-            base.Passive(opponentChar);
+
+            if (wonRound == true && bleed == 3)
+            {
+                Console.WriteLine("The Cat made " + otherChar.name + " start to bleed!");
+            }
+
 
             if (bleed > 0)
             {
-                Console.WriteLine("The opponent bled!");
+                Console.WriteLine(otherChar.name + " bled!");
                 Console.ReadLine();
-                opponentChar.LostHealth = 2.5;
+                otherChar.LostHealth = 2.5;
                 bleed--;
             }
             else
             {
-                bleed = 2;
+                bleed = 3;
             }
             
         }

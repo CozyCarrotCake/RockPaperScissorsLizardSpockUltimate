@@ -25,7 +25,7 @@ namespace RockPaperScissorsLizardSpockUltimate
             characters.Add(new TheShield());
             characters.Add(new TheBreaker());
             characters.Add(new TheQuick());
-            //characters.Add(new TheSledgehammer());
+            characters.Add(new TheInvisible());
 
             bool didWin;
 
@@ -66,6 +66,25 @@ namespace RockPaperScissorsLizardSpockUltimate
         {
             Console.WriteLine("Hello and welcome to TITLE");
             Console.ReadLine();
+
+            Console.WriteLine("1. Single Player");
+            Console.WriteLine();
+            Console.WriteLine("2. Multi Player");
+            Console.WriteLine();
+            Console.WriteLine("3. Info");
+            Console.WriteLine();
+
+            string introPick = Console.ReadLine();
+            int introInt;
+            bool introSuccess = int.TryParse(introPick, out introInt);
+            while (introSuccess == false || introInt < 1 || introInt > 3)
+            {
+                Console.WriteLine("Please pick one of the alternatives above by pressing it's specified number followed by ENTER!");
+
+                introPick = Console.ReadLine();
+                introSuccess = int.TryParse(introPick, out introInt);
+            }
+
         }
 
         

@@ -54,6 +54,7 @@
     <Compile Include="CharacterRandomizer.cs" />
     <Compile Include="Defensive.cs" />
     <Compile Include="Evader.cs" />
+    <Compile Include="Info.cs" />
     <Compile Include="Lizard.cs" />
     <Compile Include="None.cs" />
     <Compile Include="Offensive.cs" />

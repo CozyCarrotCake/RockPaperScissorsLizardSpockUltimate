@@ -11,19 +11,11 @@ namespace RockPaperScissorsLizardSpockUltimate
         public Block()
         {
             name = "Block"; // isa shit
-
-            againstRock = 1;
-            againstPaper = 1;
-            againstScissors = 1;
-            againstLizard = 1;
-            againstSpock = 1;
-
-            damage = 0;
-            defense = 100;
-            combo = 0;
-            criticalHit = 0;
-
-            //Breaks all passives?
+            
+            //Just stops the fight part of the fight!
+            //Breaks all passives and stops combo!
         }
+
+        
     }
 }

@@ -18,8 +18,12 @@ namespace RockPaperScissorsLizardSpockUltimate
 
 
 
-        public List<Character> Choose(List<Character> yourCharacters, List<Character> characters)
+        public List<Character> Choose(List<Character> yourCharacters, List<Character> programCharacters)
         {
+            //So that they only dissapear here, but doesn't?
+            List<Character> characters = programCharacters;
+
+
             //Intro
             Console.Clear();
             Console.WriteLine("You will now choose your 3 fighters!");

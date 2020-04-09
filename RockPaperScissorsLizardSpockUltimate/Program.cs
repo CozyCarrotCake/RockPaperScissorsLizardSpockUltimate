@@ -27,24 +27,90 @@ namespace RockPaperScissorsLizardSpockUltimate
             characters.Add(new TheQuick());
             characters.Add(new TheInvisible());
 
-            bool didWin;
+            bool didWin = false;
 
-
-            
-
-            Intro();
+            int introInt;
 
             
-           
+            while (1== 1)
+            {
+                introInt = Intro();
 
+                
+
+                if (introInt == 1)
+                {
+                    SinglePlayer(yourCharacters, opponentCharacters, characters, didWin);
+                }
+                else if (introInt == 2)
+                {
+                    Console.WriteLine("Sorry Multiplayer is still being assembled!");
+                    Console.ReadLine();
+                }
+                else if (introInt == 3)
+                {
+                    Info info = new Info();
+                    info.IntroInfo(characters);
+                }
+                else
+                {
+                    break;
+
+                }
+            }
+            
+        }
+
+
+
+        //Intro!
+        static int Intro()
+        {
+
+            Console.Clear();
+
+
+            Console.WriteLine("Hello and welcome to NAME, the new version of the classic Rock, Paper, Scissors, Lizard, Spock!");
+            Console.ReadLine();
+
+            Console.WriteLine("1. Single Player");
+            Console.WriteLine();
+            Console.WriteLine("2. Multi Player");
+            Console.WriteLine();
+            Console.WriteLine("3. Info");
+            Console.WriteLine();
+            Console.WriteLine("4. Quit");
+            
+
+            string introPick = Console.ReadLine();
+            int introInt;
+            bool introSuccess = int.TryParse(introPick, out introInt);
+            while (introSuccess == false || introInt < 1 || introInt > 4)
+            {
+                Console.WriteLine("Please pick one of the alternatives above by pressing it's specified number followed by ENTER!");
+
+                introPick = Console.ReadLine();
+                introSuccess = int.TryParse(introPick, out introInt);
+            }
+
+            Console.Clear();
+
+            return introInt;
+        }
+
+
+        static void SinglePlayer(List<Character> yourCharacters, List<Character> opponentCharacters, List<Character> characters, bool didWin )
+        {
             CharacterPicker characterPicker = new CharacterPicker();
             yourCharacters = characterPicker.Choose(yourCharacters, characters);
 
+            Console.WriteLine(characters.Count);
+            Console.ReadLine();
 
             CharacterRandomizer characterRandomizer = new CharacterRandomizer();
             opponentCharacters = characterRandomizer.Randomizer(opponentCharacters, characters);
 
-
+            
             Teams teams = new Teams();
             teams.MatchUp(yourCharacters, opponentCharacters);
 
@@ -54,39 +120,7 @@ namespace RockPaperScissorsLizardSpockUltimate
 
 
             End(didWin);
-            
-            
-            Console.ReadLine();
         }
-
-
-
-        //Intro!
-        static void Intro()
-        {
-            Console.WriteLine("Hello and welcome to TITLE");
-            Console.ReadLine();
-
-            Console.WriteLine("1. Single Player");
-            Console.WriteLine();
-            Console.WriteLine("2. Multi Player");
-            Console.WriteLine();
-            Console.WriteLine("3. Info");
-            Console.WriteLine();
-
-            string introPick = Console.ReadLine();
-            int introInt;
-            bool introSuccess = int.TryParse(introPick, out introInt);
-            while (introSuccess == false || introInt < 1 || introInt > 3)
-            {
-                Console.WriteLine("Please pick one of the alternatives above by pressing it's specified number followed by ENTER!");
-
-                introPick = Console.ReadLine();
-                introSuccess = int.TryParse(introPick, out introInt);
-            }
-
-        }
-
         
 
         //Timer - nOt used for now
@@ -110,6 +144,7 @@ namespace RockPaperScissorsLizardSpockUltimate
                 Console.WriteLine("Shit you lost loser!");
             }
 
+            Console.ReadLine();
         }
 
     }

@@ -12,6 +12,8 @@ namespace RockPaperScissorsLizardSpockUltimate
         //Just writes the teams
         public void MatchUp(List<Character> yourCharacters, List<Character> opponentCharacters)
         {
+            
+
             Console.Clear();
             Console.WriteLine("Your Team:");
             for (int i = 0; i < 3; i++)

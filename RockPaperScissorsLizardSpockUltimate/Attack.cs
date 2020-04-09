@@ -108,5 +108,40 @@ namespace RockPaperScissorsLizardSpockUltimate
             //Gets overrode in the subclasses, but needs to be able to get called from program so gets created here.
         }
         
+
+
+
+        //Info
+
+        public void Info()
+        {
+            Console.WriteLine("Good Against: ");
+            if (againstRock == 1)
+            {
+                Console.WriteLine("Rock");
+            }
+            if (againstPaper == 1)
+            {
+                Console.WriteLine("Paper");
+            }
+            if (againstScissors == 1)
+            {
+                Console.WriteLine("Scissors");
+            }
+            if (againstLizard == 1)
+            {
+                Console.WriteLine("Lizard");
+            }
+            if (againstSpock == 1)
+            {
+                Console.WriteLine("Spock");
+            }
+
+
+            //Transformations
+        }
+
+
+
     }
 }

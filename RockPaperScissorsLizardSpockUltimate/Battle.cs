@@ -57,14 +57,22 @@ namespace RockPaperScissorsLizardSpockUltimate
         //if the entire fight is done or not
         bool done = false;
 
-        
+        //the damage you've done during the entire game
+        double totalDealt;
+        double totalTaken;
+        double highscore;
+
+
 
 
 
         //The fight, runs the fight
         public bool Fight(List<Character> yourCharacters, List<Character> opponentCharacters)
         {
-            
+            totalDealt = 0;
+            totalTaken = 0;
+            highscore = 0;
+
             yourChar = yourCharacters[0];
             yourCharacters.Remove(yourChar);
             opponentChar = opponentCharacters[0];
@@ -103,19 +111,14 @@ namespace RockPaperScissorsLizardSpockUltimate
                     Console.WriteLine("You chose " + yourAttack.name);
                     Console.WriteLine("Your opponent chose " + opponentAttack.name);
 
+
+                    //Quicks Passive
+                    YourPassive(0);
+                    OpponentPassive(0);
+
                     
-
-                    if (yourChar.whenPassive == 0)
-                    {
-                        yourChar.Passive(opponentChar, yourAttack, opponentAttack, youWonRound);
-                    }
-                    else if (opponentChar.whenPassive == 0)
-                    {
-                        opponentChar.Passive(yourChar, opponentAttack, yourAttack, opponentWonRound);
-                    }
-
-
-
+                    
+                    
                     //TRANSFORMATION
                     yourAttack = YourTransformation();
 
@@ -124,55 +127,65 @@ namespace RockPaperScissorsLizardSpockUltimate
                     // Enemy transformation
                     opponentAttack = EnemyTransformation();
 
+
+                    //För möjlig smart NPC attack
                     yourLastAttackIndex = attackIndex;
+
+
+                }
+
+
+                if (yourAttack.name != "Block" && opponentAttack.name != "Block")
+                {
+
+                    // Which attack wins
+                    WinOrLoose(yourChar, yourAttack, oppAttackIndex);
+                    WinOrLoose(opponentChar, opponentAttack, attackIndex);
+
+
+
+
+                    // Who wins and does the damage
+                    WhoWins();
+
+
+
+
+                    //Every characters specific passives
+                    YourPassive(3);
+                    OpponentPassive(3);
+
+
                     
+
+
+
+                    //If your fighter dies
+                    CheckDeath(yourCharacters);
+
+                    //If opponent fighter dies
+                    OpponentCheckDeath(opponentCharacters);
+
+
                 }
-
-                               
-
-                // Which attack wins
-                WinOrLoose(yourChar, yourAttack, oppAttackIndex);
-                WinOrLoose(opponentChar, opponentAttack, attackIndex);
-
-                
-
-
-                // Who wins and does the damage
-                WhoWins();
-
-
-
-
-                //Every characters specific passives
-                if (yourChar.whenPassive == 3)
+                else if (yourAttack.name == "Block")
                 {
-                    yourChar.Passive(opponentChar, yourAttack, opponentAttack, youWonRound);
+                    Console.WriteLine(yourChar.name + " blocked " + opponentChar.name + "'s attack!");
+                    Console.ReadLine();
                 }
-                else if (opponentChar.whenPassive == 3)
+                else
                 {
-                    opponentChar.Passive(yourChar, opponentAttack, yourAttack, opponentWonRound);
+                    Console.WriteLine(opponentChar.name + " blocked " + yourChar.name + "'s attack!");
+                    Console.ReadLine();
                 }
 
-
-
-
-
-
-
-
-
-
-                //If your fighter dies
-                CheckDeath(yourCharacters);
-
-                //If opponent fighter dies
-                OpponentCheckDeath(opponentCharacters);
-
-                
 
                 Console.Clear();
 
             }
+
+            highscore = totalDealt - totalTaken;
+            Console.WriteLine("Your highscore: " + highscore);
 
             return didWin;
 
@@ -513,7 +526,7 @@ namespace RockPaperScissorsLizardSpockUltimate
                 //Sledges passive
                 if (yourChar.whenPassive == 1)
                 {
-                    yourChar.Passive(opponentChar, yourAttack, opponentAttack, youWonRound);
+                    YourPassive(1);
                 }
 
                 //for basically every character
@@ -547,7 +560,7 @@ namespace RockPaperScissorsLizardSpockUltimate
 
             if (opponentChar.whenPassive == 2 && invisPas < 15)
             {
-                opponentChar.Passive(yourChar, opponentAttack, yourAttack, opponentWonRound);
+                OpponentPassive(2);
 
             }
             else
@@ -555,7 +568,7 @@ namespace RockPaperScissorsLizardSpockUltimate
                 opponentChar.LostHealth = damageDealt;
             }
 
-            
+            totalDealt += damageDealt;
 
             
         }
@@ -584,7 +597,7 @@ namespace RockPaperScissorsLizardSpockUltimate
                 //Sledges passive
                 if (opponentChar.whenPassive == 1)
                 {
-                    opponentChar.Passive(yourChar, opponentAttack, yourAttack, opponentWonRound);
+                    OpponentPassive(1);
                 }
 
                 //for basically every character
@@ -619,7 +632,7 @@ namespace RockPaperScissorsLizardSpockUltimate
 
             if (yourChar.whenPassive == 2 && invisPas < 15)
             {
-                yourChar.Passive(opponentChar, yourAttack, opponentAttack, youWonRound);
+                YourPassive(2);
 
             }
             else
@@ -627,9 +640,30 @@ namespace RockPaperScissorsLizardSpockUltimate
                 yourChar.LostHealth = damageDealt;
             }
 
-            
+            totalTaken += damageDealt;
+
+
         }
 
+
+
+        //Passives
+        public void YourPassive(int whenPassive)
+        {
+            if (yourChar.whenPassive == whenPassive)
+            {
+                yourChar.Passive(opponentChar, yourAttack, opponentAttack, youWonRound);
+            }
+
+        }
+
+        public void OpponentPassive(int whenPassive)
+        {
+            if (yourChar.whenPassive == whenPassive)
+            {
+                opponentChar.Passive(yourChar, opponentAttack, yourAttack, opponentWonRound);
+            }
+        }
 
 
 
@@ -690,5 +724,7 @@ namespace RockPaperScissorsLizardSpockUltimate
         }
 
 
+
+        
     }
 }

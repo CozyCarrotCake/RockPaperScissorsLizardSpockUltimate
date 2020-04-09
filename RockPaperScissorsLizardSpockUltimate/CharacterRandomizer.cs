@@ -13,11 +13,23 @@ namespace RockPaperScissorsLizardSpockUltimate
         {
             Random charGen = new Random();
 
-            for (int i = 0; i < 3; i++)
+            HashSet<Character> hashCharacters = new HashSet<Character>();
+
+            for (int i = 1; i < 4; i++)
             {
                 int charIndex = charGen.Next(0, characters.Count);
+
+                while (hashCharacters.Count != i)
+                {
+                    hashCharacters.Add(characters[charIndex]);
+                    if (hashCharacters.Count != i)
+                    {
+                        charIndex = charGen.Next(0, characters.Count);
+                    }
+                    
+                }
+
                 opponentCharacters.Add(characters[charIndex]);
-                characters.Remove(characters[charIndex]);
                 
             }
 

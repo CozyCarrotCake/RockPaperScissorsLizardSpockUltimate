@@ -12,9 +12,9 @@ namespace RockPaperScissorsLizardSpockUltimate
         {
             name = "Turtle";
 
-            againstPaper += 1;
-            againstRock += 1;
-            defense += 20;
+            transPaper = true;
+            transRock = true;
+            transDef = true;
         }
     }
 }

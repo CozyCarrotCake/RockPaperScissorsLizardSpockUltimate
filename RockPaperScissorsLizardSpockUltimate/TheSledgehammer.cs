@@ -26,7 +26,7 @@ namespace RockPaperScissorsLizardSpockUltimate
 
         }
 
-        public override void Passive(Character otherChar, Attack yourAttack, Attack otherAttack, bool wonRound)
+        public override void Passive(Character otherChar, Attack yourAttack, Attack otherAttack)
         {
 
             Console.WriteLine("It's a crit, but the crit doesn't affect the Sledgehammer!");

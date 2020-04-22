@@ -12,9 +12,9 @@ namespace RockPaperScissorsLizardSpockUltimate
         { 
             name = "Khaaan";
 
-            againstSpock += 1;
-            againstPaper += 1;
-            criticalHit += 20;
+            transSpock = true;
+            transPaper = true;
+            transCrit = true;
         }
     }
 }

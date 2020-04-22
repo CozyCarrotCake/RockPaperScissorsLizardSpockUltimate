@@ -1,0 +1,291 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="RockPaperScissorsLizardSpockUltimate.Assassin" Collapsed="true">
+    <Position X="2.25" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assassin.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RockPaperScissorsLizardSpockUltimate.Attack" Collapsed="true">
+    <Position X="14.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAwABAQIgBAEAAAaGAQZAAQEACgAAAABgEoIACY=</HashCode>
+      <FileName>Attack.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RockPaperScissorsLizardSpockUltimate.Battle">
+    <Position X="24.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQQAAQE8AIIiAEIiAAgAAAJAAABBiAACAAAgBUAEEA=</HashCode>
+      <FileName>Battle.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RockPaperScissorsLizardSpockUltimate.Block">
+    <Position X="26.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Block.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RockPaperScissorsLizardSpockUltimate.Blocker" Collapsed="true">
+    <Position X="15.75" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Blocker.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RockPaperScissorsLizardSpockUltimate.Bruiser" Collapsed="true">
+    <Position X="6.75" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Bruiser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RockPaperScissorsLizardSpockUltimate.Character" Collapsed="true">
+    <Position X="8.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAIgAAIAAAKFAAJQRAMCAAQCABAgEAIAQI=</HashCode>
+      <FileName>Character.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RockPaperScissorsLizardSpockUltimate.CharacterPicker">
+    <Position X="20.5" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAECAAAAAAAAAAQgAAAAAAAAAAAAAAAAgAAAAAAAA=</HashCode>
+      <FileName>CharacterPicker.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RockPaperScissorsLizardSpockUltimate.CharacterRandomizer">
+    <Position X="22.75" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>CharacterRandomizer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RockPaperScissorsLizardSpockUltimate.Defensive">
+    <Position X="13.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Defensive.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RockPaperScissorsLizardSpockUltimate.Evader" Collapsed="true">
+    <Position X="11.25" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Evader.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RockPaperScissorsLizardSpockUltimate.Info">
+    <Position X="27" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAABAAAAAAQAAEAAAAAAAAAAAAA=</HashCode>
+      <FileName>Info.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RockPaperScissorsLizardSpockUltimate.Lizard">
+    <Position X="21" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Lizard.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RockPaperScissorsLizardSpockUltimate.None">
+    <Position X="24.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>None.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RockPaperScissorsLizardSpockUltimate.Offensive">
+    <Position X="4.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Offensive.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RockPaperScissorsLizardSpockUltimate.Paper">
+    <Position X="7.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Paper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RockPaperScissorsLizardSpockUltimate.Program">
+    <Position X="24.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEIAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RockPaperScissorsLizardSpockUltimate.Rock">
+    <Position X="12" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Rock.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RockPaperScissorsLizardSpockUltimate.Scissors">
+    <Position X="16.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Scissors.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RockPaperScissorsLizardSpockUltimate.Snap">
+    <Position X="28.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Snap.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RockPaperScissorsLizardSpockUltimate.Special" Collapsed="true">
+    <Position X="27.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Special.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RockPaperScissorsLizardSpockUltimate.Spock">
+    <Position X="3" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Spock.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RockPaperScissorsLizardSpockUltimate.Teams">
+    <Position X="21.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Teams.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RockPaperScissorsLizardSpockUltimate.TheBoxer">
+    <Position X="8" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAEAAAAA=</HashCode>
+      <FileName>TheBoxer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RockPaperScissorsLizardSpockUltimate.TheBreaker">
+    <Position X="17" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAEAAAAA=</HashCode>
+      <FileName>TheBreaker.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RockPaperScissorsLizardSpockUltimate.TheCat">
+    <Position X="3.5" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAABAAAAAAAAEAAAACAAAAAAAAAAAEAAAAA=</HashCode>
+      <FileName>TheCat.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RockPaperScissorsLizardSpockUltimate.TheInvisible">
+    <Position X="10.25" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAEAAAAA=</HashCode>
+      <FileName>TheInvisible.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RockPaperScissorsLizardSpockUltimate.TheQuick">
+    <Position X="12.5" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAEAAAAA=</HashCode>
+      <FileName>TheQuick.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RockPaperScissorsLizardSpockUltimate.TheShield">
+    <Position X="14.75" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAEAAAAA=</HashCode>
+      <FileName>TheShield.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RockPaperScissorsLizardSpockUltimate.TheSledgehammer">
+    <Position X="5.75" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAEAAAAA=</HashCode>
+      <FileName>TheSledgehammer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RockPaperScissorsLizardSpockUltimate.TheSniper">
+    <Position X="1.25" Y="8.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAEAIAAAAAAAAAAAAAAEAAAAA=</HashCode>
+      <FileName>TheSniper.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RockPaperScissorsLizardSpockUltimate.TraBoi">
+    <Position X="6.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>TraBoi.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RockPaperScissorsLizardSpockUltimate.TraBoulder">
+    <Position X="13" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>TraBoulder.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RockPaperScissorsLizardSpockUltimate.TraDragon">
+    <Position X="19.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>TraDragon.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RockPaperScissorsLizardSpockUltimate.TraEdward">
+    <Position X="17.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>TraEdward.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RockPaperScissorsLizardSpockUltimate.TraEyeStabber">
+    <Position X="15.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>TraEyeStabber.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RockPaperScissorsLizardSpockUltimate.TraGun">
+    <Position X="1.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>TraGun.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RockPaperScissorsLizardSpockUltimate.TraHardRock">
+    <Position X="10.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>TraHardRock.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RockPaperScissorsLizardSpockUltimate.TraKhaaan">
+    <Position X="4" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>TraKhaaan.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RockPaperScissorsLizardSpockUltimate.TraTree">
+    <Position X="8.5" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>TraTree.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="RockPaperScissorsLizardSpockUltimate.TraTurtle">
+    <Position X="22" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>TraTurtle.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

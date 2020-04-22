@@ -27,6 +27,7 @@ namespace RockPaperScissorsLizardSpockUltimate
 
         public override void Transform()
         {
+            base.Transform();
             firstTransform = new TraEdward();
             secondTransform = new TraEyeStabber();
         }

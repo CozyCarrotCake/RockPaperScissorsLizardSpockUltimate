@@ -27,7 +27,7 @@ namespace RockPaperScissorsLizardSpockUltimate
             Console.WriteLine("Passive: Fast Hands - Has a small chance of switching a losing hand into a draw");
         }
 
-        public override void Passive(Character otherChar, Attack yourAttack, Attack otherAttack, bool wonRound)
+        public override void Passive(Character otherChar, Attack yourAttack, Attack otherAttack)
         {
 
             Random quickGen = new Random();

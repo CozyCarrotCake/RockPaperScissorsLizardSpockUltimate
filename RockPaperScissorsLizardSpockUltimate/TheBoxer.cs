@@ -26,7 +26,7 @@ namespace RockPaperScissorsLizardSpockUltimate
         }
 
 
-        public override void Passive(Character otherChar, Attack yourAttack, Attack otherAttack, bool wonRound)
+        public override void Passive(Character otherChar, Attack yourAttack, Attack otherAttack)
         {
 
             if (otherChar.Streak > 1)

@@ -10,6 +10,8 @@ namespace RockPaperScissorsLizardSpockUltimate
     {
         public int bleed { get; protected set; } = 3;
 
+        bool bleedBitch = false;
+
         public TheCat()
         {
             name = "The Cat";
@@ -30,24 +32,28 @@ namespace RockPaperScissorsLizardSpockUltimate
                        
         }
 
-        public override void Passive(Character otherChar, Attack yourAttack, Attack otherAttack, bool wonRound)
+        public override void Passive(Character otherChar, Attack yourAttack, Attack otherAttack)
         {
 
             if (wonRound == true && bleed == 3)
             {
+                Console.WriteLine();
                 Console.WriteLine("The Cat made " + otherChar.name + " start to bleed!");
+
+                bleedBitch = true;
             }
 
 
-            if (bleed > 0)
+            if (bleedBitch == true && bleed > 0)
             {
                 Console.WriteLine(otherChar.name + " bled!");
                 Console.ReadLine();
                 otherChar.LostHealth = 2.5;
                 bleed--;
             }
-            else
+            else if (bleed == 0)
             {
+                bleedBitch = false;
                 bleed = 3;
             }
             

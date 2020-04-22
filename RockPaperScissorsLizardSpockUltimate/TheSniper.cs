@@ -30,7 +30,7 @@ namespace RockPaperScissorsLizardSpockUltimate
 
         }
 
-        public override void Passive(Character otherChar, Attack yourAttack, Attack otherAttack, bool wonRound)
+        public override void Passive(Character otherChar, Attack yourAttack, Attack otherAttack)
         {
             if (streak > 0)
             {

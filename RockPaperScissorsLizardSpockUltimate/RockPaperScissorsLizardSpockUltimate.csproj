@@ -63,6 +63,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Rock.cs" />
     <Compile Include="Scissors.cs" />
+    <Compile Include="SinglePlayer.cs" />
     <Compile Include="Snap.cs" />
     <Compile Include="Special.cs" />
     <Compile Include="Spock.cs" />
@@ -88,6 +89,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

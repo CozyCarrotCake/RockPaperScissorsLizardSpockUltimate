@@ -11,28 +11,17 @@ namespace RockPaperScissorsLizardSpockUltimate
     {
         static void Main(string[] args)
         {
-            //Chosen Characters
-            List<Character> yourCharacters = new List<Character>();
-            List<Character> opponentCharacters = new List<Character>();
 
-            List<Character> characters = new List<Character>();
-
-            //List of the avaible Characters
-            characters.Add(new TheBoxer());
-            characters.Add(new TheSledgehammer());
-            characters.Add(new TheSniper());
-            characters.Add(new TheCat());
-            characters.Add(new TheShield());
-            characters.Add(new TheBreaker());
-            characters.Add(new TheQuick());
-            characters.Add(new TheInvisible());
-
-            bool didWin = false;
-
+            //Variabeln används för att spara värdet av spelarens val i intro-menyn
             int introInt;
 
-            
-            while (1== 1)
+
+            //Teams-instansen skapas här då den skapar listan med alla karaktärer och lägger till instanserna av karaktärerna i den. 
+            Teams teams = new Teams();
+
+
+            //Loopen som hela spelet körs i, körs oändligt tills spelaren väljer "Quit Game" i menyn.
+            while (1 == 1) 
             {
                 introInt = Intro();
 
@@ -40,20 +29,25 @@ namespace RockPaperScissorsLizardSpockUltimate
 
                 if (introInt == 1)
                 {
-                    SinglePlayer(yourCharacters, opponentCharacters, characters, didWin);
+                    //Tar en till SinglePlayer klassen och dess huvudmetod
+                    SinglePlayer singlePlayer = new SinglePlayer();
+                    singlePlayer.SinglePlay(teams);
                 }
                 else if (introInt == 2)
                 {
+                    //Multiplayer har jag inte lyckats lägga till då det skulle behövas lite API-programmering för det som jag för tillfället inte kunnat/ orkat göra.
                     Console.WriteLine("Sorry Multiplayer is still being assembled!");
                     Console.ReadLine();
                 }
                 else if (introInt == 3)
                 {
+                    //Tar en till The Info Hub!!! 
                     Info info = new Info();
-                    info.IntroInfo(characters);
+                    info.IntroInfo();
                 }
                 else
                 {
+                    //Om man av någon anledning vill sluta spela detta fantastiska spel
                     break;
 
                 }
@@ -63,7 +57,8 @@ namespace RockPaperScissorsLizardSpockUltimate
 
 
 
-        //Intro!
+        //Intro, skriver bara ut huvudmenyn och tar den första andvändarinputen och felsöker den genom en tryParse-och-variabelvärde-check med trevlig liten while-loop 
+        //för att se till att man gör rätt
         static int Intro()
         {
 
@@ -79,9 +74,9 @@ namespace RockPaperScissorsLizardSpockUltimate
             Console.WriteLine();
             Console.WriteLine("3. Info");
             Console.WriteLine();
-            Console.WriteLine("4. Quit");
+            Console.WriteLine("4. Quit Game");
             
-
+            //Finns många av dessa tryparse-checkar då typ varje typ av användarinput är genom val av siffror.
             string introPick = Console.ReadLine();
             int introInt;
             bool introSuccess = int.TryParse(introPick, out introInt);
@@ -98,54 +93,11 @@ namespace RockPaperScissorsLizardSpockUltimate
             return introInt;
         }
 
-
-        static void SinglePlayer(List<Character> yourCharacters, List<Character> opponentCharacters, List<Character> characters, bool didWin )
-        {
-            CharacterPicker characterPicker = new CharacterPicker();
-            yourCharacters = characterPicker.Choose(yourCharacters, characters);
-
-            Console.WriteLine(characters.Count);
-            Console.ReadLine();
-
-            CharacterRandomizer characterRandomizer = new CharacterRandomizer();
-            opponentCharacters = characterRandomizer.Randomizer(opponentCharacters, characters);
-
-            
-            Teams teams = new Teams();
-            teams.MatchUp(yourCharacters, opponentCharacters);
-
-
-            Battle battle = new Battle();
-            didWin = battle.Fight(yourCharacters, opponentCharacters);
-
-
-            End(didWin);
-        }
         
-
-        //Timer - nOt used for now
-        /*static void Timer_Elapsed(Object sender, ElapsedEventArgs e)
-        {
-            Console.WriteLine("3...");
-        }
-        */
-
+        
             
             
-        //End
-        static void End(bool didWin)
-        {
-            if(didWin == true)
-            {
-                Console.WriteLine("Yay you won!");
-            }
-            else
-            {
-                Console.WriteLine("Shit you lost loser!");
-            }
-
-            Console.ReadLine();
-        }
+        
 
     }
 }

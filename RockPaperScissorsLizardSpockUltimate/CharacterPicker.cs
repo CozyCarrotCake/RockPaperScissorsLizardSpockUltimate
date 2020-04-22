@@ -9,29 +9,32 @@ namespace RockPaperScissorsLizardSpockUltimate
     class CharacterPicker : Teams
     {
 
-        //Choosing CHaracters
+        //Choosing Characters
         public int charIndex = 0;
         string charSelection = "";
 
-        //Have to have an array to write all as the indexes doesn't exist in the lists yet.
+        //Have to have an array to write the chosen characters names as the indexes doesn't exist in the lists yet and causes the game to crash
         string[] yourCharactersNames = new string[3];
 
 
-
-        public List<Character> Choose(List<Character> yourCharacters, List<Character> programCharacters)
+        //Låter spelaren välja sin/sina karaktärer
+        public List<Character> Choose(List<Character> yourCharacters, int singleRounds)
         {
-            //So that they only dissapear here, but doesn't?
-            List<Character> characters = programCharacters;
+            //gör en kopia på listan som skapades i Team-instansen så att jag kan ta bort karaktärer ur den utan att de försvinner från hela spelet
+            List<Character> characters = new List<Character>(programCharacters);
 
 
-            //Intro
+            
             Console.Clear();
             Console.WriteLine("You will now choose your 3 fighters!");
             Console.WriteLine("Choose your FIRST fighter! Press the number of the character for its information!");
 
-            YourFighters();
+
+            //En metod som skriver upp Spelarens valda karaktärer och hur många man kommer behöva välja
+            YourFighters(singleRounds);
 
 
+            
             WriteTheCharacters(characters);
 
 
@@ -59,50 +62,71 @@ namespace RockPaperScissorsLizardSpockUltimate
                 Console.WriteLine("If you want to see another characters information Press their number!");
 
 
-                YourFighters();
+                YourFighters(singleRounds);
 
                 WriteTheCharacters(characters);
                                 
 
 
-                //Kollar om man väljer en ny karaktär eller om man bestämde sig för den man hade
+                //Kollar om man väljer indexet av en ny karaktär eller om man bestämde sig för den man hade
                 charSelection = Console.ReadLine();
 
 
 
 
-                //Om man tryckte enter så bestämde man sig, annars körs loopen om
+                //Om man tryckte enter så bestämde man sig, annars körs loopen om med det index man precis valde
                 if (charSelection == "")
                 {
                     Console.Clear();
 
+                    //Den valda karaktären instanseras genom charIndex som man valde
                     Character yourChar = characters[charIndex - 1];
 
                     Console.WriteLine("Allright you chose " + yourChar.name);
+
+                    //CharIndex blir 0 för att inte köra någon annan karaktärs info direkt
                     charIndex = 0;
 
+
+                    //Tar bort karaktären från listan så att man inte kan välja samma två gånger
                     characters.Remove(yourChar);
+
+                    //lägger till karaktären i listan som returneras och används till själva fighten
                     yourCharacters.Add(yourChar);
 
-                    if (yourCharacters.Count == 1)
+                    
+                    //Gränssnitt för om man ska välja fler karaktärer.
+                    if (singleRounds == 3)
                     {
-                        yourCharactersNames[0] = yourChar.name;
-                        Console.WriteLine("Choose your SECOND fighter! Press the number of the character for its information!");
+                        if (yourCharacters.Count == 1)
+                        {
+                            yourCharactersNames[0] = yourChar.name;
+                            Console.WriteLine("Choose your SECOND fighter! Press the number of the character for its information!");
 
-                    }
-                    else if (yourCharacters.Count == 2)
-                    {
-                        yourCharactersNames[1] = yourChar.name;
-                        Console.WriteLine("Choose your THIRD fighter! Press the number of the character for its information!");
+                        }
+                        else if (yourCharacters.Count == 2)
+                        {
+                            yourCharactersNames[1] = yourChar.name;
+                            Console.WriteLine("Choose your THIRD fighter! Press the number of the character for its information!");
+                        }
+                        else
+                        {
+                            yourCharactersNames[2] = yourChar.name;
+                            break; // Only breaks the while when all characters have been chosen
+
+                            
+                        }
+
+                        YourFighters(singleRounds);
                     }
                     else
                     {
-                        yourCharactersNames[2] = yourChar.name;
-                        break; // Only breaks the while when all characters have been chosen
+                        break;
                     }
+                    
 
 
-                    YourFighters();
+                    //Skriver upp karaktärererna och tar input igen om man valde en karaktär förra gången
 
                     WriteTheCharacters(characters);
 
@@ -117,7 +141,8 @@ namespace RockPaperScissorsLizardSpockUltimate
             return yourCharacters;
         }
 
-        //Skriver ut alla karaktärer
+        //Skriver ut alla karaktärer med hjälp av en for-loop, och ifall spelar valt någon genom dess input som kommer senare kör den karaktärens Info-klass-metod. 
+        //Körs inte första gången då charIndex har värdet 0 innan användarinputen.
         public void WriteTheCharacters(List <Character> characters)
         {
             for (int i = 0; i < characters.Count; i++)
@@ -133,14 +158,19 @@ namespace RockPaperScissorsLizardSpockUltimate
             Console.WriteLine("");
         }
 
-        //Skriver ut de karaktärer man valt
-        public void YourFighters()
+        //Skriver ut de karaktärer man valt, visar upp andra delen om man kör modet där man har 3 fighters
+        public void YourFighters(int singleRounds)
         {
             Console.WriteLine("");
             Console.WriteLine("Your fighters:");
             Console.WriteLine("1. " + yourCharactersNames[0]);
-            Console.WriteLine("2. " + yourCharactersNames[1]);
-            Console.WriteLine("3. " + yourCharactersNames[2]);
+
+            if(singleRounds == 3)
+            {
+                Console.WriteLine("2. " + yourCharactersNames[1]);
+                Console.WriteLine("3. " + yourCharactersNames[2]);
+            }
+            
         }
     }
 }

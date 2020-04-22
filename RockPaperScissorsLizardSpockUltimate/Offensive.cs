@@ -11,8 +11,8 @@ namespace RockPaperScissorsLizardSpockUltimate
 
         public Offensive()
         {
-            damage = 50;
-            defense = 25;
+            damage = 30;
+            defense = 20;
             combo = 1.15;
             criticalHit = 15;
 

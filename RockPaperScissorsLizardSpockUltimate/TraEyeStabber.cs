@@ -12,9 +12,10 @@ namespace RockPaperScissorsLizardSpockUltimate
         {
             name = "Eye Stabber";
 
-            againstSpock += 1;
-            againstLizard += 1;
-            criticalHit += 20;
+            transSpock = true;
+            transLizard = true;
+            transCrit = true;
+
         }
     }
 }

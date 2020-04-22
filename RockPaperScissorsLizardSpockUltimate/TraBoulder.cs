@@ -12,9 +12,11 @@ namespace RockPaperScissorsLizardSpockUltimate
         {
             name = "Boulder";
 
-            againstPaper += 1;
-            againstRock += 1;
-            damage += 20;
+            transPaper = true;
+            transRock = true;
+            transDmg = true;
+
+            TransformStats();
         }
 
 

@@ -12,9 +12,10 @@ namespace RockPaperScissorsLizardSpockUltimate
         {
             name = "Edward";
 
-            againstSpock += 1;
-            againstPaper += 1;
-            combo += 0.2;
+            transPaper = true;
+            transSpock = true;
+            transCombo = true;
+            
         }
     }
 }

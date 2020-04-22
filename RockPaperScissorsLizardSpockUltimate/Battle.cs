@@ -18,6 +18,8 @@ namespace RockPaperScissorsLizardSpockUltimate
         //The attacks, gets new subclasses each round based on what is picked and maybe transformed
         Attack yourAttack = new Attack();
         Attack opponentAttack = new Attack();
+
+        //Index som används för NPCs AI
         int yourLastAttackIndex = 1;
 
 
@@ -39,15 +41,9 @@ namespace RockPaperScissorsLizardSpockUltimate
         double damageDealt = 10;
 
 
+        //EN Queue för lite speciell AI NPC ojojoj
         Queue<int> attackQueue = new Queue<int>();
         List<int> attacks = new List<int>();
-
-
-
-
-        //GENERAL BOOLS
-        bool youWonRound;
-        bool opponentWonRound;
         
 
 
@@ -66,24 +62,28 @@ namespace RockPaperScissorsLizardSpockUltimate
 
 
 
-        //The fight, runs the fight
+        //Huvudmetoden som kör den mesta gränssnittet och kör alla andra metoder
         public bool Fight(List<Character> yourCharacters, List<Character> opponentCharacters)
         {
+            //Integers som används för en highscore funktion som körs i slutet av fighten
             totalDealt = 0;
             totalTaken = 0;
             highscore = 0;
 
+            //Skapar en individuell instans av båda lagens första karaktär och tar bort den från listorna.
             yourChar = yourCharacters[0];
             yourCharacters.Remove(yourChar);
             opponentChar = opponentCharacters[0];
             opponentCharacters.Remove(opponentChar);
             Console.WriteLine("First off, " + yourChar.name + " vs. " + opponentChar.name);
+            Console.WriteLine("");
+            Console.WriteLine("Time to fight!");
             Console.ReadLine();
             Console.Clear();
 
 
-
-            while (done == false)
+            //körs tills alla fighters på något lag är döda
+            while (done == false) 
             {
 
                 //Remaining HP
@@ -96,12 +96,11 @@ namespace RockPaperScissorsLizardSpockUltimate
                 yourAttack = ChooseAttack();
 
                 
-                //Only plays if you picked an attack
+                //Körs bara om man valde en attack
                 if (didChoose == true)
                 {
 
                     //Opponents Attack
-                    //Make smart
                     opponentAttack = OpponentAttack();
 
 
@@ -134,7 +133,7 @@ namespace RockPaperScissorsLizardSpockUltimate
 
                 }
 
-
+                //körs bara om någon inte valde att blocka
                 if (yourAttack.name != "Block" && opponentAttack.name != "Block")
                 {
 
@@ -206,7 +205,7 @@ namespace RockPaperScissorsLizardSpockUltimate
             Console.WriteLine("4. Lizard");
             Console.WriteLine("5. Spock");
 
-            /* TIMER
+            /* TIMER - funkade inte så struntade i det för nu
 
             Timer timer1 = new Timer(1000);
             timer1.Elapsed += Timer_Elapsed;
@@ -235,7 +234,7 @@ namespace RockPaperScissorsLizardSpockUltimate
             return yourAttack;
         }
 
-        //Did choose Attack
+        //Whats attack did the input corralate to
         public Attack YourAttack()
         {
             if (didChoose == true)
@@ -256,11 +255,17 @@ namespace RockPaperScissorsLizardSpockUltimate
         {
             Random opponentAttackGen = new Random();
 
+            //Slumpar ifall NPCn kommer vara "smart" och väljer att köra den attack spelaren valde förra rundan, 20%s chans
             int oppAttackSmart = opponentAttackGen.Next(0, 100);
+
+            //Om inte körs denna, som lägger till attacker i en kö som används i 5 rundor (om den inte kör en "smart" runda då kön bara pausas)
             if (oppAttackSmart < 80)
             {
+                //Om kön är tom fylls den på igen
                 if (attackQueue.Count == 0)
                 {
+
+                    //Först läggs 5 integers in i en lista för att representera attackernas index
 
                     attacks.Add(1);
                     attacks.Add(2);
@@ -268,6 +273,9 @@ namespace RockPaperScissorsLizardSpockUltimate
                     attacks.Add(4);
                     attacks.Add(5);
 
+                    //Sen körs en forloop med nedåtgående i-variabel, där en int får ett slumpat värde mellan 1 och i-variabeln (därför den går ner och inte upp)
+                    //den slumpade siffran läggs till i en kö medans attack-indexet tas bort från listan
+                    //loopen körs om tills siffrorna 1-5 har lagts till i kön i slumpad ordning
                     for (int i = 6; i > 1; i--)
                     {
                         oppAttackIndex = opponentAttackGen.Next(1, i);
@@ -276,12 +284,14 @@ namespace RockPaperScissorsLizardSpockUltimate
                         attacks.Remove(attacks[oppAttackIndex - 1]);
                     }
 
-                    //for the round
+                    //Köns första siffra tas bort och används i WhichAttack-metoden, där den speglas mot attack-indexen för att välja indexets attack som attack för denna runda.
                     oppAttackIndex = attackQueue.Dequeue();
                     opponentAttack = WhichAttack(oppAttackIndex);
                 }
                 else
                 {
+
+                    //Om kön inte är tom körs enbart deQueue-momentet
                     oppAttackIndex = attackQueue.Dequeue();
                     opponentAttack = WhichAttack(oppAttackIndex);
 
@@ -289,9 +299,8 @@ namespace RockPaperScissorsLizardSpockUltimate
             }
             else
             {
-                //choosing the attack that you used last round
-
-                Console.ReadLine();
+                //är då "smart" och väljer attacken som spelaren valde senaste rundan
+                
                 oppAttackIndex = yourLastAttackIndex;
                 opponentAttack = WhichAttack(oppAttackIndex);
             }
@@ -305,9 +314,11 @@ namespace RockPaperScissorsLizardSpockUltimate
         
 
 
-        //Which Attack was chosen 
+        //Which Attack was chosen - baseras på int-indexet som valdes i YourAttack och OpponentAttack och returnerar valda attacken
         public Attack WhichAttack(int index)
         {
+
+
             Attack whichYourAttack = new Attack();
 
             if (index == 1)
@@ -342,18 +353,19 @@ namespace RockPaperScissorsLizardSpockUltimate
 
 
 
-        //Transformations!!!
+        //Gränsnitt och metodik över ifall spelaren ska transformera sin attack
         public Attack YourTransformation()
         {
             Console.WriteLine("");
             Console.WriteLine("Do you wanna transform your attack?");
 
-            //Writes out and creates the attacks in the Classes
-
-
-
+            //Skriver ut specialattacken eller att man inte kan använda den
             yourChar.BehaviorSpecial(canDoBehavior);
+
+            //instansierar den valda attackens vanliga transformationer        
             yourAttack.Transform();
+
+            //Skriver ut transformationerna eller att man inte kan använda de
             yourAttack.Transformations(yourChar.specials);
 
 
@@ -367,13 +379,17 @@ namespace RockPaperScissorsLizardSpockUltimate
             if (transformSuccess == false || transformIndex > 3 || transformIndex < 1)
             {
                 Console.WriteLine("You chose not to transform!");
+
             }
+            //ifall man valde att använda sin behaviorAttack
             else if (transformIndex == 1)
             {
                 if (canDoBehavior == true)
                 {
                     Console.WriteLine("You chose to transform your " + yourAttack.name + " into a " + yourChar.behaviorAttack.name);
                     yourAttack = yourChar.behaviorAttack;
+
+                    //Kan bara köras en gång per match
                     canDoBehavior = false;
                 }
                 else
@@ -381,12 +397,15 @@ namespace RockPaperScissorsLizardSpockUltimate
                     Console.WriteLine("You have already used your Behavior transformation for this game!");
                 }
             }
+            //om man valde någon av sina vanliga transformations
             else if (yourChar.specials > 0)
             {
                 if (transformIndex == 2)
                 {
                     Console.WriteLine("You chose to transform your " + yourAttack.name + " into a " + yourAttack.firstTransform.name);
                     yourAttack = yourAttack.firstTransform;
+
+                    //En get-set som subtraherar 1 till en int, om den når 0 kan man inte använda den igen. 
                     yourChar.Specials = 1;
                 }
                 else if (transformIndex == 3)
@@ -412,6 +431,8 @@ namespace RockPaperScissorsLizardSpockUltimate
             int transformInt = transformGen.Next(100);
             if (transformInt < 10)
             {
+
+                //Slumpar bara om den har möjlighet att göra någon transformation
                 if (opponentChar.Specials > 0 && opponentCanDoBehavior == true)
                 {
                     transformInt = transformGen.Next(0, 3);
@@ -425,7 +446,7 @@ namespace RockPaperScissorsLizardSpockUltimate
                     transformInt = transformGen.Next(1, 3);
                 }
 
-
+                //Instansierar attackens transformationer
                 opponentAttack.Transform();
 
 
@@ -456,24 +477,24 @@ namespace RockPaperScissorsLizardSpockUltimate
 
 
 
-        //Check For Winner
+        //Körs för båda karaktärer, använde rmotståndarens attackIndex för att få tillbaka ett int-värde från attack-klass-metoden som beskriver hur bra ens attack är emot den andras
+        //den sparas i en get-set metod i karaktären som sedan avnänds...
         public void WinOrLoose(Character chara, Attack attack, int index)
         {
             chara.Against = attack.Against(index);
             
         }
 
+        //... i denna metod, då jag jämför de två karaktärernas against-värde för att se vem som vann.
         public void WhoWins()
         {
-            
-
             
             if (yourChar.Against > opponentChar.Against)
             {
                 Console.WriteLine("You Win!");
 
-                youWonRound = true;
-                opponentWonRound = false;
+                yourChar.wonRound = true;
+                opponentChar.wonRound = false;
 
                 DealDamage();
             }
@@ -481,8 +502,8 @@ namespace RockPaperScissorsLizardSpockUltimate
             {
                 Console.WriteLine("You Loose!");
 
-                youWonRound = false;
-                opponentWonRound = true;
+                yourChar.wonRound = false;
+                opponentChar.wonRound = true;
 
                 TakeDamage();
 
@@ -491,8 +512,8 @@ namespace RockPaperScissorsLizardSpockUltimate
             {
                 Console.WriteLine("It's a Draw!");
 
-                youWonRound = false;
-                opponentWonRound = false;
+                yourChar.wonRound = false;
+                opponentChar.wonRound = false;
             }
 
             Console.ReadLine();
@@ -509,10 +530,12 @@ namespace RockPaperScissorsLizardSpockUltimate
             damageDealt += yourAttack.DoDamage() + yourChar.DoDamage();
 
 
-            //combo            
+            //Combo, om man vann ökar ens combo och om man förlorade blir den 0 (getset)
             opponentChar.Streak = 0;
             yourChar.Streak = 1;
-            double comboValue = Math.Pow((yourAttack.combo * yourChar.combo), yourChar.Streak);
+
+            //Lite matteskit där jag tar attackens kombo-värde * karaktärens kombovärde upphöjt i ens streak / 2, skulle behöva mer tuning och balans
+            double comboValue = Math.Pow((yourAttack.combo * yourChar.combo), yourChar.Streak / 2);
             Console.WriteLine(yourChar.name + "'s Combo Bonus: " + comboValue);
             damageDealt *= comboValue;
 
@@ -523,7 +546,7 @@ namespace RockPaperScissorsLizardSpockUltimate
 
             if (hit <= (yourAttack.criticalHit + yourChar.criticalHit) / 2)
             {
-                //Sledges passive
+                //Sledges passive - kan inte bli crittad
                 if (yourChar.whenPassive == 1)
                 {
                     YourPassive(1);
@@ -545,8 +568,10 @@ namespace RockPaperScissorsLizardSpockUltimate
 
 
             //defense
-            damageDealt = damageDealt - opponentAttack.TakeDamage() + opponentChar.TakeDamage();
+            damageDealt = damageDealt - (opponentAttack.TakeDamage() + opponentChar.TakeDamage());
 
+
+            //minsta värdet som man kan skada om man vann är 5
             if (damageDealt < 5)
             {
                 damageDealt = 5;
@@ -554,10 +579,11 @@ namespace RockPaperScissorsLizardSpockUltimate
 
 
 
-            //Passives
+            //Passive
             Random invisGen = new Random();
             int invisPas = invisGen.Next(100);
 
+            //The Invisible kan missa skada om man slumpar rätt
             if (opponentChar.whenPassive == 2 && invisPas < 15)
             {
                 OpponentPassive(2);
@@ -570,9 +596,13 @@ namespace RockPaperScissorsLizardSpockUltimate
 
             totalDealt += damageDealt;
 
+
+            Console.WriteLine(yourChar.name + " dealt " + damageDealt + " damage to " + opponentChar);
             
         }
 
+
+        //Samma som dealdamage fsat för fienden
         public void TakeDamage()
         {
             // main damage
@@ -581,7 +611,7 @@ namespace RockPaperScissorsLizardSpockUltimate
             //combo
             yourChar.Streak = 0;
             opponentChar.Streak = 1;
-            double comboValue = Math.Pow((opponentAttack.combo * opponentChar.combo), opponentChar.Streak);
+            double comboValue = Math.Pow((opponentAttack.combo * opponentChar.combo), opponentChar.Streak / 2);
             Console.WriteLine(opponentChar.name + "'s Combo Bonus: " + comboValue);
             damageDealt *= comboValue;
 
@@ -617,7 +647,7 @@ namespace RockPaperScissorsLizardSpockUltimate
 
 
             //taken
-            damageDealt = damageDealt - yourAttack.TakeDamage() + yourChar.TakeDamage();
+            damageDealt = damageDealt - (yourAttack.TakeDamage() + yourChar.TakeDamage());
 
             if (damageDealt < 5)
             {
@@ -642,7 +672,7 @@ namespace RockPaperScissorsLizardSpockUltimate
 
             totalTaken += damageDealt;
 
-
+            Console.WriteLine(opponentChar.name + " dealt " + damageDealt + " damage to " + yourChar);
         }
 
 
@@ -650,18 +680,23 @@ namespace RockPaperScissorsLizardSpockUltimate
         //Passives
         public void YourPassive(int whenPassive)
         {
+            //Kör karaktärens passive om dess whenPassive int stämmer överens med inten som skrivs när metoden kallas.
+            //Detta för att olika karaktärers passives körs vid olika tillfällen.
+            //Vissa körs även direkt i koden på vissa ställen och har då ingen direkt sak här.
+            //Denna metod leder till en virtual method i CHaracter som sedan overridas i karaktärens kod.
             if (yourChar.whenPassive == whenPassive)
             {
-                yourChar.Passive(opponentChar, yourAttack, opponentAttack, youWonRound);
+                yourChar.Passive(opponentChar, yourAttack, opponentAttack);
             }
 
         }
 
+        //samma fst fiendens
         public void OpponentPassive(int whenPassive)
         {
-            if (yourChar.whenPassive == whenPassive)
+            if (opponentChar.whenPassive == whenPassive)
             {
-                opponentChar.Passive(yourChar, opponentAttack, yourAttack, opponentWonRound);
+                opponentChar.Passive(yourChar, opponentAttack, yourAttack);
             }
         }
 
@@ -671,18 +706,22 @@ namespace RockPaperScissorsLizardSpockUltimate
         //Checks if the fighters die
         public void CheckDeath(List<Character> yourCharacters)
         {
+            //Har den mindre än 0 hp?
             if (yourChar.HP < 0)
             {
                 Console.Clear();
                 Console.WriteLine(yourChar.name + " can no longer fight!");
 
+                //Har du några karaktärer kvar eller var denna den sista?
                 if (yourCharacters.Count != 0)
                 {
+                    //Om du har karaktärer kvar byts din karaktär-instans ut mot nästa i din lista och den tas bort från listan.
                     yourChar = yourCharacters[0];
                     yourCharacters.Remove(yourChar);
                     Console.WriteLine(yourChar.name + " jumps in!");
                     yourChar.HP = 100;
                 }
+                //Om den var sista förlorar du och fighten är över
                 else                
                 {
                     Console.WriteLine("All your fighters are unable to continue!");
@@ -695,6 +734,7 @@ namespace RockPaperScissorsLizardSpockUltimate
             }
         }
 
+        //Samma fast fiende
         public void OpponentCheckDeath(List<Character> opponentCharacters)
         {
             if (opponentChar.HP < 0)

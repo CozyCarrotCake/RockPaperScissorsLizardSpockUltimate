@@ -31,6 +31,8 @@ namespace RockPaperScissorsLizardSpockUltimate
 
         public override void Transform()
         {
+            base.Transform();
+
             firstTransform = new TraBoulder();
             secondTransform = new TraHardRock();
         }

@@ -12,9 +12,9 @@ namespace RockPaperScissorsLizardSpockUltimate
         {
             name = "Dragon";
 
-            againstSpock += 1;
-            againstScissors += 1;
-            damage += 20;
+            transSpock = true;
+            transScissors = true;
+            transDmg = true;
         }
     }
 }

@@ -28,7 +28,7 @@ namespace RockPaperScissorsLizardSpockUltimate
 
         }
 
-        public override void Passive(Character otherChar, Attack yourAttack, Attack otherAttack, bool wonRound)
+        public override void Passive(Character otherChar, Attack yourAttack, Attack otherAttack)
         {
             
             Console.WriteLine(otherChar.name + " missed the attack on the Invisible!");

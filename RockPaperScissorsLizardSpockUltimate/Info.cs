@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace RockPaperScissorsLizardSpockUltimate
 {
-    class Info
+    class Info : Teams
     {
-        public void IntroInfo(List<Character> characters)
+        public void IntroInfo()
         {
-
-            while (1 == 1)
+            //Körs också genom en while-loop som körs oändligt tills man väljer att backa till huvudmenyn genom en break
+            while (1 == 1) 
             {
                 Console.Clear();
                 Console.WriteLine("INFO:");
@@ -24,6 +24,7 @@ namespace RockPaperScissorsLizardSpockUltimate
                 Console.WriteLine("4. Back");
                 Console.WriteLine();
 
+                //Ännu en tryparse-input-check
                 string info = Console.ReadLine();
                 int infoInt;
                 bool infoSuccess = int.TryParse(info, out infoInt);
@@ -40,7 +41,7 @@ namespace RockPaperScissorsLizardSpockUltimate
                 }
                 else if (infoInt == 2)
                 {
-                    Fighters(characters);
+                    Fighters();
                 }
                 else if (infoInt == 3)
                 {
@@ -56,6 +57,8 @@ namespace RockPaperScissorsLizardSpockUltimate
 
         }
 
+
+        //Generel Info om spelet och hur man spelar, ifall man vill förstå allt innan man hoppar in.
         public void GenInfo()
         {
             Console.Clear();
@@ -81,6 +84,10 @@ namespace RockPaperScissorsLizardSpockUltimate
             Console.WriteLine("Every choice in the game can be made by writing the alternatives written number on the keyboard and then pressing ENTER.");
             Console.WriteLine("Practice this here by writing a number and then pressing ENTER to get back to the homescreen!");
 
+
+
+            //Här kommer min favorit tryparse-check, där jag bara vill att spelaren övar på den svåra uppgiften att trycka på en siffra följt av ENTER. Finns ju ett par sådana
+            //test som redan hänt men tänkte bara låta de veta att detta är det enda de kommer behöva göra
             string test = Console.ReadLine();
             int testInt;
             bool testSuccess = int.TryParse(test, out testInt);
@@ -93,23 +100,29 @@ namespace RockPaperScissorsLizardSpockUltimate
         }
 
 
-        public void Fighters(List<Character> characters)
+        //Info om alla fighters. Använder samma kodsystem som CHaracterPicker i hur den räknar upp karaktärerna och läser upp Info om karaktären spelaren valt.
+        public void Fighters()
         {
+            //charIndex skapas här uppe snarare än där nere vid resten av den klassiska string/int/bool skapelsen vid en tryparse-check då den även används i uppskrivningsloopen, 
+            //även fast den den första gången den skrivs upp bara finns för att berätta loopen att ingen karaktär ska uppskrivas. 
             int charIndex = 0;
             while (1 == 1)
             {
                
                 Console.Clear();
 
+                //Denna for-loop skriver upp alla instanser av Karaktärer/Fighters i programCharacters, men kör även en karaktärs Info-metod om den blev vald i användarinputen
+                //nedan förra loopen. Ingen är vald första gången de skrivs upp då if-satsen enbart körs om for--loopens i-variabel har samma värde som charIndex (-1), och då charIndex
+                //har värdet 0 kommer inte detta hända
                 Console.WriteLine("The Fighters:");
-                for (int i = 0; i < characters.Count; i++)
+                for (int i = 0; i < programCharacters.Count; i++)
                 {
 
                     Console.WriteLine();
-                    Console.WriteLine(i + 1 + ". " + characters[i].name);
+                    Console.WriteLine(i + 1 + ". " + programCharacters[i].name);
                     if (i == charIndex - 1)
                     {
-                        characters[i].Info(i);
+                        programCharacters[i].Info(i);
                     }
                     
                 }
@@ -141,8 +154,10 @@ namespace RockPaperScissorsLizardSpockUltimate
         }
 
 
+        //Info om alla Attacker
         public void Attacks()
         {
+            //Skapar instanser av attackerna och lägger till de i en lista så att man ska kunna köra deras metoder som visar dess info.
             Console.Clear();
             List<Attack> attacks = new List<Attack>();
             Rock rock = new Rock();
@@ -155,6 +170,10 @@ namespace RockPaperScissorsLizardSpockUltimate
             attacks.Add(lizard);
             Spock spock = new Spock();
             attacks.Add(spock);
+            Snap snap = new Snap();
+            attacks.Add(snap);
+            Block block = new Block();
+            attacks.Add(block);
 
             int attackIndex = 0;
             while (1 == 1)
@@ -162,25 +181,43 @@ namespace RockPaperScissorsLizardSpockUltimate
 
                 Console.Clear();
 
-                Console.WriteLine("The Fighters:");
-                for (int i = 0; i < attacks.Count; i++)
+                //Använder samma princip som vid karaktärerna, men instanserar även den valda attackens transformationer så att den kan visa info om de.
+                Console.WriteLine("The Attacks:");
+                for (int i = 0; i < 5; i++)
                 {
-
-                    Console.WriteLine();
+                    
                     Console.WriteLine(i + 1 + ". " + attacks[i].name);
                     if (i == attackIndex - 1)
                     {
                         attacks[i].Info();
-                    }
+                        Console.WriteLine();
+                        Console.WriteLine("Transformations: ");
 
+                        attacks[i].Transform();
+                        attacks[i].TransformationInfo();
+                        
+                    }
+                    Console.WriteLine();
+                }
+                
+                //Visar info om The Behavioral Transformations, samma princip som förrut men med mer matte i indexeringarna då deras relaterade siffror är högre
+                Console.WriteLine("The Behavioral Transformations: ");
+                for (int i = 0; i < 2; i++)
+                {
+                    Console.WriteLine(i + 6 + ". " + attacks[i+5].name);
+                    if (i == attackIndex - 6)
+                    {
+                        attacks[i + 5].BehavioralInfo();
+                    }
+                    Console.WriteLine();
                 }
 
                 Console.WriteLine();
-                Console.WriteLine("6. Back");
+                Console.WriteLine("8. Go Back to Info Menu");
 
                 string attackSelection = Console.ReadLine();
                 bool attackSuccess = int.TryParse(attackSelection, out attackIndex);
-                while (attackSuccess == false || attackIndex < 1 || attackIndex > 6)
+                while (attackSuccess == false || attackIndex < 1 || attackIndex > 8)
                 {
                     Console.WriteLine("Please write the number of one of the attacks!");
                     attackSelection = Console.ReadLine();
@@ -189,7 +226,7 @@ namespace RockPaperScissorsLizardSpockUltimate
                 }
                 Console.WriteLine();
 
-                if (attackIndex == 6)
+                if (attackIndex == 8)
                 {
                     break;
                 }

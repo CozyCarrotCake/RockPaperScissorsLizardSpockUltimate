@@ -19,9 +19,11 @@ namespace RockPaperScissorsLizardSpockUltimate
         public double combo { get; protected set; }
         public int criticalHit { get; protected set; }
 
+
+        //Får ett värde i offense / defensive klasserna
         public Attack behaviorAttack { get; protected set; }
 
-
+        //Specifierar när karaktärens passive ska köras
         public int whenPassive { get; protected set; }
 
 
@@ -34,11 +36,16 @@ namespace RockPaperScissorsLizardSpockUltimate
 
         protected int against;
 
+        public bool wonRound;
+
+
+
+
         //METHODS
 
         public virtual void Info(int index)
         {
-            
+            //Visar info beroende på vilken karaktär spelaren valt
             if (index < 4)
             {
                 Console.Write("Offensive | ");
@@ -80,7 +87,8 @@ namespace RockPaperScissorsLizardSpockUltimate
             theDamage = defense / 20;
             return theDamage;
         }
-        
+         
+        //tar din hp - det damaga-värde som själva fight-metoden räknat ut för rundan
         public double LostHealth
         {
             get
@@ -109,7 +117,7 @@ namespace RockPaperScissorsLizardSpockUltimate
 
 
 
-        //HOld the against information
+        //Håller against infon för whoWon metoden i singleplayer
         public int Against
         {
             get
@@ -124,7 +132,7 @@ namespace RockPaperScissorsLizardSpockUltimate
 
                
 
-        //Combo Streak
+        //Combo Streak, vinner man en runda adderas ett på streaken, förlorar man dras den ner till 0
         public int Streak
         {
             get
@@ -163,7 +171,7 @@ namespace RockPaperScissorsLizardSpockUltimate
         }
 
 
-        //How Many Specials
+        //How Many transformations can this character do, everyone has 2
         public int Specials
         {
             get
@@ -182,8 +190,8 @@ namespace RockPaperScissorsLizardSpockUltimate
         }
 
 
-        //Passives
-        public virtual void Passive(Character otherChar, Attack yourAttack, Attack otherAttack, bool wonRound)
+        //Passives, körs i subklassen, kallas här
+        public virtual void Passive(Character otherChar, Attack yourAttack, Attack otherAttack)
         {
             //0: Quick
 
@@ -198,7 +206,7 @@ namespace RockPaperScissorsLizardSpockUltimate
 
 
 
-
-
+        
+    
     }
 }

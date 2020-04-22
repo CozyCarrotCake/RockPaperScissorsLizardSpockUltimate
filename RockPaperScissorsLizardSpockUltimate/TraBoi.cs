@@ -12,9 +12,11 @@ namespace RockPaperScissorsLizardSpockUltimate
         {
             name = "Boi";
 
-            againstLizard += 1;
-            againstSpock += 1;
-            criticalHit += 20;
+            transLizard = true;
+            transSpock = true;
+            transCrit = true;
+
+            TransformStats();
         }
     }
 }
